@@ -1,0 +1,51 @@
+.bg-primary {
+    background-color: #1D84A8;
+    color: whitesmoke;
+}
+
+.ion-tab{
+    border-bottom: 5px solid transparent;
+}
+
+.ion-tab > * {
+    color: lightgrey;
+}
+
+.ion-tab:hover:not(.tab-selected) > * {
+    color: red;
+}
+
+.tab-selected{
+    border-bottom: 5px solid whitesmoke;
+}
+.tab-selected > * {
+    color: whitesmoke;
+}
+
+ion-grid{
+    height: 100%;
+}
+ion-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.custom-input{
+    border-bottom: 2px solid lightgrey;
+}
+
+.my-2{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.no-overflow{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.conversation{
+    height: 200px;
+}
