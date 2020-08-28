@@ -4,7 +4,8 @@ import {
     IonText,
     IonGrid,
     IonCol,
-    IonRow, IonItem, IonItemDivider, IonTabs, IonContent
+    IonRow,
+    IonContent
 } from "@ionic/react";
 import React from "react";
 import {useForm} from 'react-hook-form';
@@ -50,11 +51,11 @@ const SignInForm: React.FC = () => {
 
     return (
         <IonContent>
-            <IonGrid className={"align-center"}>
-                <IonRow className={"align-center"}>
+            <IonGrid className="align-center">
+                <IonRow className="align-center">
 
                     <IonCol size="10" size-md="6">
-                        <IonText className={"ion-text-center"} color="muted">
+                        <IonText className="ion-text-center">
                             <h2>Inscription</h2>
                         </IonText>
 
@@ -77,7 +78,7 @@ const SignInForm: React.FC = () => {
                                             placeholder="Identifiant"
                                         />
                                         {errors.email &&
-                                        <IonText color={"danger"}>L'adresse email est invalide</IonText>}
+                                        <IonText color="danger">L'adresse email est invalide</IonText>}
                                     </IonCol>
                                 </IonRow>
                                 <IonRow>
@@ -94,7 +95,7 @@ const SignInForm: React.FC = () => {
                                             placeholder="Mot de passe"
                                         />
                                         {errors.password &&
-                                        <IonText color={"danger"}>Le mot de passe est invalide</IonText>}
+                                        <IonText color="danger">Le mot de passe est invalide</IonText>}
                                     </IonCol>
                                     <IonCol size="12">
                                         <IonInput
@@ -109,7 +110,7 @@ const SignInForm: React.FC = () => {
                                             placeholder="Confirmation du mot de passe"
                                         />
                                         {errors.password_confirm &&
-                                        <IonText color={"danger"}>Le mot de passe est invalide</IonText>}
+                                        <IonText color="danger">Le mot de passe est invalide</IonText>}
                                     </IonCol>
                                 </IonRow>
                             </IonGrid>
@@ -129,7 +130,7 @@ const SignInForm: React.FC = () => {
                                             style={{borderColor: errors.lastname && "red"}}
                                             placeholder="Nom"
                                         />
-                                        {errors.lastname && <IonText color={"danger"}>Le nom est invalide</IonText>}
+                                        {errors.lastname && <IonText color="danger">Le nom est invalide</IonText>}
                                     </IonCol>
                                     <IonCol size="12">
                                         <IonInput
@@ -142,7 +143,7 @@ const SignInForm: React.FC = () => {
                                             style={{borderColor: errors.firstname && "red"}}
                                             placeholder="Prénom"
                                         />
-                                        {errors.firstname && <IonText color={"danger"}>Le prénom est invalide</IonText>}
+                                        {errors.firstname && <IonText color="danger">Le prénom est invalide</IonText>}
                                     </IonCol>
                                 </IonRow>
                                 <IonRow>
@@ -157,7 +158,7 @@ const SignInForm: React.FC = () => {
                                             style={{borderColor: errors.city && "red"}}
                                             placeholder="Ville"
                                         />
-                                        {errors.city && <IonText color={"danger"}>La ville est invalide</IonText>}
+                                        {errors.city && <IonText color="danger">La ville est invalide</IonText>}
                                     </IonCol>
                                     <IonCol size="12">
                                         <IonInput
@@ -171,12 +172,12 @@ const SignInForm: React.FC = () => {
                                             placeholder="Date de naissance"
                                         />
                                         {errors.birthdate &&
-                                        <IonText color={"danger"}>La date de naissance est invalide</IonText>}
+                                        <IonText color="danger">La date de naissance est invalide</IonText>}
                                     </IonCol>
                                 </IonRow>
                             </IonGrid>
                             <IonRow>
-                                <IonButton type="submit" className="bg-primary" color={"custom-primary"}
+                                <IonButton type="submit" color="primary"
                                            disabled={formState.isSubmitting}>
                                     Créer un compte
                                 </IonButton>

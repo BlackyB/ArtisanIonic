@@ -50,9 +50,9 @@ const LoginForm: React.FC = () => {
 
     return (
         <IonContent>
-            <IonGrid className={"align-center"}>
-                <IonRow className={"align-center"}>
-                    <IonCol size="10" size-md="4" className={"ion-text-center"}>
+            <IonGrid className="align-center">
+                <IonRow className="align-center">
+                    <IonCol size="10" size-md="4" className="ion-text-center">
                         <IonText color="muted">
                             <h2>Se connecter</h2>
                         </IonText>
@@ -72,7 +72,7 @@ const LoginForm: React.FC = () => {
                                             placeholder="Identifiant"
                                         />
                                         {errors.email &&
-                                        <IonText color={"danger"}>L'adresse email est invalide</IonText>}
+                                        <IonText color="danger">L'adresse email est invalide</IonText>}
                                     </IonCol>
                                 </IonRow>
                                 <IonRow>
@@ -89,12 +89,12 @@ const LoginForm: React.FC = () => {
                                             placeholder="Mot de passe"
                                         />
                                         {errors.password &&
-                                        <IonText color={"danger"}>Le mot de passe est invalide</IonText>}
+                                        <IonText color="danger">Le mot de passe est invalide</IonText>}
                                     </IonCol>
                                 </IonRow>
                             </IonGrid>
 
-                            <IonButton type="submit" className="bg-primary" color={"custom-primary"}
+                            <IonButton type="submit" color="primary"
                                        disabled={formState.isSubmitting}>
                                 Connexion
                             </IonButton>
@@ -104,8 +104,8 @@ const LoginForm: React.FC = () => {
                                         <a href={'toto'}>J'ai oublié mon mot de passe</a>
                                     </IonRow>
                                     <IonRow>
-                                        <IonButton type="button" href="/inscription" className="bg-primary"
-                                                   color={"custom-primary"}>
+                                        <IonButton type="button" href="/inscription"
+                                                   color="primary">
                                             J'ai déja un compte, me connecter
                                         </IonButton>
                                     </IonRow>

@@ -12,7 +12,7 @@
 }
 
 .ion-tab:hover:not(.tab-selected) > * {
-    color: red;
+    color: #81b5c6;
 }
 
 .tab-selected{
@@ -47,5 +47,42 @@ ion-row{
 }
 
 .conversation{
-    height: 200px;
+    height: 100px;
+}
+
+.message-border{
+    border: none;
+    border-left: 5px solid #1D84A8;
+}
+
+.chat-bubble {
+    position: relative;
+    background: #00aabb;
+    border-radius: .4em;
+    max-width: 60%;
+}
+
+.chat-bubble-right {
+    margin-left: auto !important;
+}
+
+.chat-bubble-left {
+    margin-right: auto !important;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.color-light{
+    color: #666666 !important;
+}
+
+.color-primary{
+    color: #1D84A8 !important;
+}
+
+
+.color-dark{
+    color: #000000 !important;
 }

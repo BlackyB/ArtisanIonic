@@ -15,7 +15,8 @@ import {person, home, search, chatbox} from 'ionicons/icons';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Search from './pages/Search';
-import Message from './pages/Message';
+import Conversation from './pages/Conversation';
+import ConversationDetail from './pages/ConversationDetail';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -56,27 +57,28 @@ const App: React.FC = () => {
                         <Route path="/accueil" component={Home} exact={true}/>
                         <Route path="/recherche" component={Search} exact={true}/>
                         {/*<PrivateRoute path="/messages" component={Message} exact={true}/>*/}
-                        <Route path="/messages" component={Message} exact={true}/>
+                        <Route path="/messages" component={ConversationDetail} exact={true}/>
+                        <Route path="/messagerie" component={Conversation} exact={true}/>
                         <Route path="/connexion" component={LoginForm} exact={true}/>
                         <Route path="/inscription" component={SignInForm} exact={true}/>
                         <Route path="/" render={() => <Redirect to="/accueil"/>} exact={true}/>
                     </IonRouterOutlet>
-                    <IonTabBar slot="bottom" className={"bg-primary"}>
-                        <IonTabButton tab="tab1" href="/profile" className={"bg-primary ion-tab"}>
+                    <IonTabBar slot="bottom" color="primary">
+                        <IonTabButton tab="tab1" href="/profile" className={"ion-tab"}>
                             <IonIcon icon={person} className={"ionTab"}/>
                             <IonLabel>Mon compte</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab2" href="/accueil" className={"bg-primary ion-tab"}>
+                        <IonTabButton tab="tab2" href="/accueil" className={"ion-tab"}>
                             <IonIcon icon={home}/>
                             <IonLabel>Accueil</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab3" href="/recherche" className={"bg-primary ion-tab"}>
+                        <IonTabButton tab="tab3" href="/recherche" className={"ion-tab"}>
                             <IonIcon icon={search}/>
                             <IonLabel>Rechercher</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab4" href="/messages" className={"bg-primary ion-tab"}>
+                        <IonTabButton tab="tab4" href="/messagerie" className={"ion-tab"}>
                             <IonIcon icon={chatbox}/>
-                            <IonLabel>Messages</IonLabel>
+                            <IonLabel>Messagerie</IonLabel>
                         </IonTabButton>
                     </IonTabBar>
                 </IonTabs>
