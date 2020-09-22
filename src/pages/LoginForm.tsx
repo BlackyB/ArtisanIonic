@@ -9,7 +9,6 @@ import {
 import React from "react";
 import {useForm} from 'react-hook-form';
 import isEmail from "validator/lib/isEmail";
-import firebase from "../firebase";
 
 const LoginForm: React.FC = () => {
 
@@ -19,12 +18,6 @@ const LoginForm: React.FC = () => {
 
     function onSubmit(data: any) {
         console.log(data);
-        firebase.auth().signInWithEmailAndPassword(data.email, data.password).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-        });
 
         // fetch("https://api.example.com/items")
         //     .then(
@@ -51,7 +44,7 @@ const LoginForm: React.FC = () => {
     return (
         <IonContent>
             <IonGrid className="align-center">
-                <IonRow className="align-center">
+                <IonRow className="align-center ion-full-row">
                     <IonCol size="10" size-md="4" className="ion-text-center">
                         <IonText color="muted">
                             <h2>Se connecter</h2>
@@ -68,7 +61,7 @@ const LoginForm: React.FC = () => {
                                                 required: true,
                                                 validate: (input) => isEmail(input),
                                             })}
-                                            style={{borderColor: errors.email && "red"}}
+                                            style={{borderColor: errors.password && "red"}}
                                             placeholder="Identifiant"
                                         />
                                         {errors.email &&
@@ -98,15 +91,14 @@ const LoginForm: React.FC = () => {
                                        disabled={formState.isSubmitting}>
                                 Connexion
                             </IonButton>
-                            <IonRow>
-                                <IonCol className="my-2">
-                                    <IonRow>
+                            <IonRow className="my-2">
+                                <IonCol>
+                                    <IonRow className="ion-full-row">
                                         <a href={'toto'}>J'ai oublié mon mot de passe</a>
                                     </IonRow>
-                                    <IonRow>
-                                        <IonButton type="button" href="/inscription"
-                                                   color="primary">
-                                            J'ai déja un compte, me connecter
+                                    <IonRow className="ion-full-row">
+                                        <IonButton type="button" href="/inscription" color="primary">
+                                            Je n'ai pas encore de compte
                                         </IonButton>
                                     </IonRow>
                                 </IonCol>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     IonContent,
     IonItem,
@@ -23,12 +23,15 @@ let conv = {
     user_2_id: 27,
     last_message_date: "22/08",
     last_message_content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    new_message: true,
+    new_message: false,
     other_user: "Marcel Dublanc"
 }
 
 let userId: number = 27;
 // let other_user_id = conv['user_1_id'] === userId ? conv['user_2_id'] : conv['user_1_id'];
+
+let testUserIds = [27, 12]
+
 
 
 const Conversation: React.FC = () => {
@@ -36,6 +39,11 @@ const Conversation: React.FC = () => {
     let [input, setInput] = useState(null)
     let [newMessage, setNewMessage] = useState("")
     let [messageSent, setMessageSent] = useState(false)
+
+    const options: Intl.DateTimeFormatOptions = {
+        day: "numeric", month: "numeric", year: "numeric",
+        hour: "2-digit", minute: "2-digit"
+    };
 
     const handleValueChange = (event: any) => {
         if (!input) {
@@ -49,14 +57,18 @@ const Conversation: React.FC = () => {
 
     const sendMessage = () => {
 
+        let nextSender = testUserIds[Math.round(Math.random() * Math.floor(1))]
+
         // @ts-ignore
-        if(newMessage) {
+        if (newMessage) {
+            var date = new Date();
+
             messages.push(
                 {
                     id: 1,
                     username: 'Maxime William',
-                    user_id: 27,
-                    message_date: "21/08/2020 18h38",
+                    user_id: nextSender,
+                    message_date: date.toLocaleDateString("fr-FR", options),
                     message_content: newMessage,
                     new_message: false
                 }
@@ -68,8 +80,25 @@ const Conversation: React.FC = () => {
 
     }
 
+    const listenSubmit = (event:any) => {
+        if (event?.charCode === 13) {
+            if (newMessage != null) {
+                sendMessage()
+            }
+        }
+    }
+
+    const scrollBottom = () => {
+        let list = document.querySelector("ion-content"); return list && list.scrollToBottom();
+    }
+
+    useEffect(() => {
+        scrollBottom()
+    })
+
+
+
     return (
-        <IonContent>
             <IonPage>
                 <PageTitle pageTitle={conv['other_user'] + " - " + conv['ad_title']} previous={'/messagerie'}/>
                 <IonContent>
@@ -111,13 +140,13 @@ const Conversation: React.FC = () => {
                         type="text"
                         placeholder="Répondre"
                         onIonChange={handleValueChange}
+                        onKeyPress={listenSubmit}
                     />
                     <IonButton size="default" fill="outline" onClick={sendMessage}>
                         <IonIcon icon={send}/>
                     </IonButton>
                 </IonItem>
             </IonPage>
-        </IonContent>
     );
 };
 

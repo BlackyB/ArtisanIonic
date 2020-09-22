@@ -3,6 +3,19 @@
     color: whitesmoke;
 }
 
+.bg-secondary {
+    background-color: #e2e2e2;
+}
+
+.bg-tertiary {
+    background-color: #a8411d;
+    color: whitesmoke;
+}
+
+slide-height{
+    height: 200px !important;
+}
+
 .ion-tab{
     border-bottom: 5px solid transparent;
 }
@@ -22,18 +35,44 @@
     color: whitesmoke;
 }
 
+.hover-title:hover ion-card-title{
+    text-decoration: underline solid #1D84A8;
+}
+
 ion-grid{
     height: 100%;
 }
-ion-row{
+
+.ion-full-row{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
 }
 
+.img-container{
+    padding: 0;
+    margin: 0;
+}
+
+.img-container > img {
+    min-height: 100%;
+    min-width: 100%;
+    object-fit:cover;
+}
+
 .custom-input{
     border-bottom: 2px solid lightgrey;
+}
+
+.opacity{
+    background-color: rgba(255,255,255,0.5);
+
+}
+
+.icon-medium{
+    height: 50px;
+    width: 50px;
 }
 
 .my-2{

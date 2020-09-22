@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import {
     IonApp,
     IonIcon,
@@ -17,6 +17,10 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Conversation from './pages/Conversation';
 import ConversationDetail from './pages/ConversationDetail';
+import User from './classes/User'
+import LoginForm from "./pages/LoginForm";
+import SignInForm from "./pages/SignInForm";
+import PrivateRoute from "./components/PrivateRoute";
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -38,11 +42,6 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './App.css';
-import User from './classes/User'
-import LoginForm from "./pages/LoginForm";
-import SignInForm from "./pages/SignInForm";
-import PrivateRoute from "./components/PrivateRoute";
-
 
 
 const App: React.FC = () => {
@@ -52,27 +51,27 @@ const App: React.FC = () => {
             <IonReactRouter>
                 <IonTabs>
                     <IonRouterOutlet>
-                        {/*<PrivateRoute path="/profile" component={Profile} exact={true}/>*/}
-                        <Route path="/profile" component={Profile} exact={true}/>
-                        <Route path="/accueil" component={Home} exact={true}/>
-                        <Route path="/recherche" component={Search} exact={true}/>
-                        {/*<PrivateRoute path="/messages" component={Message} exact={true}/>*/}
-                        <Route path="/messages" component={ConversationDetail} exact={true}/>
-                        <Route path="/messagerie" component={Conversation} exact={true}/>
-                        <Route path="/connexion" component={LoginForm} exact={true}/>
-                        <Route path="/inscription" component={SignInForm} exact={true}/>
-                        <Route path="/" render={() => <Redirect to="/accueil"/>} exact={true}/>
+                        <Switch>
+                            <PrivateRoute exact path="/profile" component={Profile}/>
+                            <Route exact path="/accueil" component={Home}/>
+                            <Route path="/recherche/:type/:localization" component={Search}/>
+                            <PrivateRoute exact path="/messages" component={ConversationDetail}/>
+                            <PrivateRoute path="/messagerie" component={Conversation}/>
+                            <Route exact path="/connexion" component={LoginForm}/>
+                            <Route exact path="/inscription" component={SignInForm}/>
+                            <Route exact path="/" render={() => <Redirect to="/accueil"/>}/>
+                        </Switch>
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom" color="primary">
-                        <IonTabButton tab="tab1" href="/profile" className={"ion-tab"}>
+                        <IonTabButton tab="tab1" href="/profile" className="ion-tab">
                             <IonIcon icon={person} className={"ionTab"}/>
                             <IonLabel>Mon compte</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab2" href="/accueil" className={"ion-tab"}>
+                        <IonTabButton tab="tab2" href="/accueil" className="ion-tab">
                             <IonIcon icon={home}/>
                             <IonLabel>Accueil</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab3" href="/recherche" className={"ion-tab"}>
+                        <IonTabButton tab="tab3" href="/recherche" className="ion-tab">
                             <IonIcon icon={search}/>
                             <IonLabel>Rechercher</IonLabel>
                         </IonTabButton>

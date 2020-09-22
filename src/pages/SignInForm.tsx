@@ -10,7 +10,6 @@ import {
 import React from "react";
 import {useForm} from 'react-hook-form';
 import isEmail from "validator/lib/isEmail";
-import firebase from "../firebase";
 
 const SignInForm: React.FC = () => {
 
@@ -20,12 +19,6 @@ const SignInForm: React.FC = () => {
 
     function onSubmit(data: any) {
         console.log(data);
-        firebase.auth().createUserWithEmailAndPassword(data.email, data.password).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-        });
 
         // fetch("https://api.example.com/items")
         //     .then(
@@ -52,7 +45,7 @@ const SignInForm: React.FC = () => {
     return (
         <IonContent>
             <IonGrid className="align-center">
-                <IonRow className="align-center">
+                <IonRow className="align-center ion-full-row">
 
                     <IonCol size="10" size-md="6">
                         <IonText className="ion-text-center">
@@ -176,7 +169,7 @@ const SignInForm: React.FC = () => {
                                     </IonCol>
                                 </IonRow>
                             </IonGrid>
-                            <IonRow>
+                            <IonRow className="ion-full-row ion-margin-bottom">
                                 <IonButton type="submit" color="primary"
                                            disabled={formState.isSubmitting}>
                                     Créer un compte

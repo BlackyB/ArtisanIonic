@@ -1,9 +1,13 @@
-import React from 'react';
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import React, {useState} from 'react';
+import {IonContent, IonHeader, IonPage, IonSearchbar, IonTitle, IonToolbar} from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import PageTitle from "../components/PageTitle";
 
-const Search: React.FC = () => {
+const Search = (props: { match: { params: any; }; }) => {
+
+    console.log(props.match.params)
+    const [searchText, setSearchText] = useState('')
+
     return (
         <IonContent>
             <IonPage>
@@ -15,6 +19,7 @@ const Search: React.FC = () => {
                         </IonToolbar>
                     </IonHeader>
                     <ExploreContainer name="Tab 3 page"/>
+                    <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="focus"/>
                 </IonContent>
             </IonPage>
         </IonContent>
