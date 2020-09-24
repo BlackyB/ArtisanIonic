@@ -1,6 +1,3 @@
-import React from "react";
-
-
 let conversation = [
     {
         id: 1,

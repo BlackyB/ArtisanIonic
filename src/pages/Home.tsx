@@ -1,21 +1,20 @@
 import React from 'react';
 import {
-    IonAvatar,
     IonButton,
-    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
     IonCol,
     IonContent,
     IonGrid,
-    IonHeader, IonIcon,
     IonPage,
     IonRow, IonSlide, IonSlides,
     IonText,
-    IonTitle,
-    IonToolbar
 } from '@ionic/react';
 import PageTitle from "../components/PageTitle";
 import './Home.css';
-import {person} from 'ionicons/icons';
+import {get} from "../API/API";
 
 const Home: React.FC = () => {
 
@@ -27,10 +26,22 @@ const Home: React.FC = () => {
         grabCursor: true
     };
 
+    const handleClick = () => {
+        get()
+    }
+
+
+    // get()
+    // console.log(get())
+    // console.log(get('ADS'))
+    // console.log(get('LOGIN', 2))
+    // console.log(get('ADS', 10, [{key: "age", value: "12"}, {key: "size", value: "180cm"}] ))
+
     return (
         <IonPage className={"opacity"}>
             <PageTitle pageTitle={"Accueil"}/>
             <IonContent>
+                <IonButton onClick={handleClick}>GET</IonButton>
                 <IonGrid className="ion-no-padding">
 
                     <IonRow className="ion-padding-vertical">
@@ -39,7 +50,9 @@ const Home: React.FC = () => {
                                 <IonRow>
                                     <IonCol size="12" size-md="4" className="img-container">
                                         <img
-                                            src="https://www.weldom.fr/media/wysiwyg/article/191218-cadeaux-01.jpg"/>
+                                            src="https://www.weldom.fr/media/wysiwyg/article/191218-cadeaux-01.jpg"
+                                            alt=""
+                                        />
                                     </IonCol>
                                     <IonCol size="12" size-md="8" className="bg-tertiary">
                                         <IonCardHeader className="ion-no-padding">
@@ -83,7 +96,9 @@ const Home: React.FC = () => {
                                     </IonCol>
                                     <IonCol size="12" size-md="4" className="img-container">
                                         <img
-                                            src="https://www.projets-et-travaux.fr/wp-content/uploads/2019/11/trouver-un-artisan-electricien.jpg"/>
+                                            src="https://www.projets-et-travaux.fr/wp-content/uploads/2019/11/trouver-un-artisan-electricien.jpg"
+                                            alt=""
+                                        />
                                     </IonCol>
                                 </IonRow>
                             </IonCard>
@@ -97,17 +112,23 @@ const Home: React.FC = () => {
                             <IonRow className="ion-text-center">
                                 <IonCol size="12" size-md="4">
                                     <img className="icon-medium"
-                                         src="https://www.trouverunartisan.fr/images/icon1.png"/>
+                                         src="https://www.trouverunartisan.fr/images/icon1.png"
+                                         alt=""
+                                    />
                                     <h4>Facilité de mise en relation avec les artisans</h4>
                                 </IonCol>
                                 <IonCol size="12" size-md="4">
                                     <img className="icon-medium"
-                                         src="https://www.trouverunartisan.fr/images/icon2.png"/>
+                                         src="https://www.trouverunartisan.fr/images/icon2.png"
+                                         alt=""
+                                    />
                                     <h4>Réponses rapide à vos demandes de devis</h4>
                                 </IonCol>
                                 <IonCol size="12" size-md="4">
                                     <img className="icon-medium"
-                                         src="https://www.trouverunartisan.fr/images/icon3.png"/>
+                                         src="https://www.trouverunartisan.fr/images/icon3.png"
+                                         alt=""
+                                    />
                                     <h4>Un système d'évaluations et de gallerie</h4>
                                 </IonCol>
                             </IonRow>
@@ -129,7 +150,9 @@ const Home: React.FC = () => {
                                     </IonCol>
                                     <IonCol className="img-container" size-md="5" size="12">
                                         <img
-                                            src="https://picsum.photos/id/242/800/300"/>
+                                            src="https://picsum.photos/id/242/800/300"
+                                            alt=""
+                                        />
                                     </IonCol>
                                 </IonRow>
                             </IonSlide>
@@ -137,7 +160,9 @@ const Home: React.FC = () => {
                                 <IonRow>
                                     <IonCol className="img-container" size-md="5" size="12">
                                         <img
-                                            src="https://picsum.photos/id/243/800/300"/>
+                                            src="https://picsum.photos/id/243/800/300"
+                                            alt=""
+                                        />
                                     </IonCol>
                                     <IonCol className="bg-tertiary ion-padding" size-md="7" size="12">
                                         Montius nos tumore inusitato quodam et novo ut rebellis et maiestati
@@ -164,7 +189,9 @@ const Home: React.FC = () => {
                                     </IonCol>
                                     <IonCol className="img-container" size-md="5" size="12">
                                         <img
-                                            src="https://picsum.photos/id/238/800/300"/>
+                                            src="https://picsum.photos/id/238/800/300"
+                                            alt=""
+                                        />
                                     </IonCol>
                                 </IonRow>
                             </IonSlide>
@@ -172,7 +199,9 @@ const Home: React.FC = () => {
                                 <IonRow>
                                     <IonCol className="img-container" size-md="5" size="12">
                                         <img
-                                            src="https://picsum.photos/id/239/800/300"/>
+                                            src="https://picsum.photos/id/239/800/300"
+                                            alt=""
+                                        />
                                     </IonCol>
                                     <IonCol className="bg-tertiary ion-padding" size-md="7" size="12">
                                         Quam ob rem cave Catoni anteponas ne istum quidem ipsum, quem Apollo, ut ais,
@@ -192,7 +221,10 @@ const Home: React.FC = () => {
                             formavit.
                         </IonCol>
                         <IonCol className="img-container" size-md="5" size="12">
-                            <img src="https://sf2.viepratique.fr/wp-content/uploads/sites/8/2017/10/une-artisan-1.jpg"/>
+                            <img
+                                src="https://sf2.viepratique.fr/wp-content/uploads/sites/8/2017/10/une-artisan-1.jpg"
+                                alt=""
+                            />
                         </IonCol>
                         <IonCol className="bg-tertiary ion-padding" size-md="2" size="12">
                             Montius nos tumore inusitato quodam et novo ut rebellis et maiestati recalcitrantes Augustae
@@ -201,7 +233,9 @@ const Home: React.FC = () => {
                         </IonCol>
                         <IonCol className="img-container" size-md="3" size="12">
                             <img
-                                src="https://medias-catholique.info/wp-content/uploads/2019/03/Artisan-1024x480-640x360.jpg"/>
+                                src="https://medias-catholique.info/wp-content/uploads/2019/03/Artisan-1024x480-640x360.jpg"
+                                alt=""
+                            />
                         </IonCol>
                     </IonRow>
 
@@ -216,14 +250,19 @@ const Home: React.FC = () => {
                         </IonCol>
                         <IonCol className="img-container" size-md="2" size="12">
                             <img
-                                src="https://www.guide-artisan-alsace.fr/img/actualites/faire-appel-a-un-plombier-pour-raccorder-sa-maison-au-reseau-deau.jpg"/>
+                                src="https://www.guide-artisan-alsace.fr/img/actualites/faire-appel-a-un-plombier-pour-raccorder-sa-maison-au-reseau-deau.jpg"
+                                alt=""
+                            />
                         </IonCol>
                         <IonCol className="bg-secondary ion-padding" size-md="2" size="12">
                             Quam ob rem cave Catoni anteponas ne istum quidem ipsum, quem Apollo, ut ais, sapientissimum
                             iudicavit;
                         </IonCol>
                         <IonCol className="img-container" size-md="3" size="12">
-                            <img src="https://www.lemagdelimmobilier.com/images/dossiers/2019-09/artisan-083244.jpg"/>
+                            <img
+                                src="https://www.lemagdelimmobilier.com/images/dossiers/2019-09/artisan-083244.jpg"
+                                alt=""
+                            />
                         </IonCol>
                         <IonCol className="bg-primary ion-padding" size-md="2" size="12">
                             Ut enim benefici liberalesque sumus, non ut exigamus gratiam (neque enim beneficium

@@ -27,7 +27,7 @@ const Conversation: React.FC = () => {
                                 <IonItem key={conv['id']} href="/messages" color={index % 2 === 0 ? 'light' : ''}
                                          className={conv['new_message'] ? 'message-border' : ''}>
                                     <IonAvatar slot="start">
-                                        <img src={conv['img']} alt={'Photo de profil'}/>
+                                        <img src={conv['img']} alt={'Photo de profil ' + index}/>
                                     </IonAvatar>
                                     <IonLabel color={conv['new_message'] ? 'primary' : ''}>
                                         <h3 className="color-dark">{conv['other_user']}</h3>

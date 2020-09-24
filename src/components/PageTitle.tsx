@@ -1,7 +1,7 @@
-import {IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar} from "@ionic/react";
+import {IonHeader, IonTitle, IonToolbar} from "@ionic/react";
 import React from "react";
 
-import {chevronBack} from 'ionicons/icons';
+// import {chevronBack} from 'ionicons/icons';
 
 const PageTitle = (props:any) => {
     return (

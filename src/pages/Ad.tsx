@@ -1,5 +1,5 @@
 import React from 'react';
-import {IonButton, IonCol, IonContent, IonPage, IonRow, IonText, IonGrid} from '@ionic/react';
+import {IonCol, IonRow, IonGrid} from '@ionic/react';
 import '../App.css';
 
 const Ad = (props: any) => {
@@ -17,7 +17,7 @@ export const colAd = (data: any) => {
     data.forEach((ad: any, i: any) => {
         columns.push(
             <IonCol size="4" className={"ion-text-center"}>
-                <img src={"https://picsum.photos/id/" + i * i +  "/200/200"}/>
+                <img src={"https://picsum.photos/id/" + i * i +  "/200/200"} alt=""/>
             </IonCol>
         );
         if ((i + 1) % 3 === 0) {

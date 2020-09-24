@@ -17,8 +17,7 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Conversation from './pages/Conversation';
 import ConversationDetail from './pages/ConversationDetail';
-import User from './classes/User'
-import LoginForm from "./pages/LoginForm";
+import Auth from './classes/Auth'
 import SignInForm from "./pages/SignInForm";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -43,49 +42,50 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import './App.css';
 
-
 const App: React.FC = () => {
+
+    // const [user, setUser] = useState(Auth);
+
 
     return (
         <IonApp>
-            <IonReactRouter>
-                <IonTabs>
-                    <IonRouterOutlet>
-                        <Switch>
-                            <PrivateRoute exact path="/profile" component={Profile}/>
-                            <Route exact path="/accueil" component={Home}/>
-                            <Route path="/recherche/:type/:localization" component={Search}/>
-                            <PrivateRoute exact path="/messages" component={ConversationDetail}/>
-                            <PrivateRoute path="/messagerie" component={Conversation}/>
-                            <Route exact path="/connexion" component={LoginForm}/>
-                            <Route exact path="/inscription" component={SignInForm}/>
-                            <Route exact path="/" render={() => <Redirect to="/accueil"/>}/>
-                        </Switch>
-                    </IonRouterOutlet>
-                    <IonTabBar slot="bottom" color="primary">
-                        <IonTabButton tab="tab1" href="/profile" className="ion-tab">
-                            <IonIcon icon={person} className={"ionTab"}/>
-                            <IonLabel>Mon compte</IonLabel>
-                        </IonTabButton>
-                        <IonTabButton tab="tab2" href="/accueil" className="ion-tab">
-                            <IonIcon icon={home}/>
-                            <IonLabel>Accueil</IonLabel>
-                        </IonTabButton>
-                        <IonTabButton tab="tab3" href="/recherche" className="ion-tab">
-                            <IonIcon icon={search}/>
-                            <IonLabel>Rechercher</IonLabel>
-                        </IonTabButton>
-                        <IonTabButton tab="tab4" href="/messagerie" className={"ion-tab"}>
-                            <IonIcon icon={chatbox}/>
-                            <IonLabel>Messagerie</IonLabel>
-                        </IonTabButton>
-                    </IonTabBar>
-                </IonTabs>
-            </IonReactRouter>
+            <Auth>
+                <IonReactRouter>
+                    <IonTabs>
+                        <IonRouterOutlet>
+                            <Switch>
+                                <Route exact path="/profile" component={Profile}/>
+                                <Route exact path="/accueil" component={Home}/>
+                                <Route path="/recherche" component={Search}/>}/>
+                                <PrivateRoute exact path="/messages" component={ConversationDetail}/>
+                                <PrivateRoute path="/messagerie" component={Conversation}/>
+                                <Route exact path="/inscription" component={SignInForm}/>
+                                <Route exact path="/" render={() => <Redirect to="/accueil"/>}/>
+                            </Switch>
+                        </IonRouterOutlet>
+                        <IonTabBar slot="bottom" color="primary">
+                            <IonTabButton tab="tab1" href="/profile" className="ion-tab">
+                                <IonIcon icon={person} className={"ionTab"}/>
+                                <IonLabel>Mon compte</IonLabel>
+                            </IonTabButton>
+                            <IonTabButton tab="tab2" href="/accueil" className="ion-tab">
+                                <IonIcon icon={home}/>
+                                <IonLabel>Accueil</IonLabel>
+                            </IonTabButton>
+                            <IonTabButton tab="tab3" href="/recherche" className="ion-tab">
+                                <IonIcon icon={search}/>
+                                <IonLabel>Rechercher</IonLabel>
+                            </IonTabButton>
+                            <IonTabButton tab="tab4" href="/messagerie" className={"ion-tab"}>
+                                <IonIcon icon={chatbox}/>
+                                <IonLabel>Messagerie</IonLabel>
+                            </IonTabButton>
+                        </IonTabBar>
+                    </IonTabs>
+                </IonReactRouter>
+            </Auth>
         </IonApp>
-
     );
-
 }
 
 export default App;
