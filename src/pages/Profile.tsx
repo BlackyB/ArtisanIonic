@@ -4,7 +4,6 @@ import PageTitle from "../components/PageTitle";
 import Ad from "./Ad";
 import {AuthConsumer} from "../context/AuthContext";
 import Login from "../components/Login";
-import {get} from "../API/API";
 
 const Profile: React.FC = () => {
 
@@ -17,7 +16,8 @@ const Profile: React.FC = () => {
                         <IonContent fullscreen>
                             <IonRow>
                                 {console.log()}
-                                {/*<p>{user.role}</p>*/}
+
+                                <p>{user?.role}</p>
                                 {/*TODO PAGE MON COMPTE*/}
                                 <IonCol size-md="3"/>
                                 <IonCol size="12" size-md="6">

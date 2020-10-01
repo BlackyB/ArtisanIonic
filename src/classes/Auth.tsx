@@ -2,13 +2,22 @@ import React, {Component} from "react";
 import {AuthProvider} from "../context/AuthContext";
 
 class Auth extends Component {
+
+    defaultUser = {
+        role: "visitor",
+        email: "",
+        firstname: "",
+        lastname: ""
+    }
+
     state = {
-        authenticated: true,
+        authenticated: false,
         user: {
-            role: "visitor"
+            ...this.defaultUser
         },
         accessToken: "KDJYGFHZGJDKHILOMKZDJHJGH"
     };
+
 
     data = {};
 
@@ -22,7 +31,7 @@ class Auth extends Component {
         this.setState({
             authenticated: false,
             user: {
-                role: "visitor"
+                ...this.defaultUser
             },
             accessToken: ""
         });

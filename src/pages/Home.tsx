@@ -14,7 +14,7 @@ import {
 } from '@ionic/react';
 import PageTitle from "../components/PageTitle";
 import './Home.css';
-import {get} from "../API/API";
+import {requestAPI} from "../API/API";
 
 const Home: React.FC = () => {
 
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
     };
 
     const handleClick = () => {
-        get()
+        requestAPI("GET", "USER", 1)
     }
 
 
