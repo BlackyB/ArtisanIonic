@@ -200,7 +200,7 @@ const SignInForm: React.FC = () => {
                                         <IonInput
                                             className="custom-input"
                                             color="primary"
-                                            name="lastname"
+                                            name="lastName"
                                             type="text"
                                             ref={register({
                                                 required: true,
@@ -218,7 +218,7 @@ const SignInForm: React.FC = () => {
                                         <IonInput
                                             className="custom-input"
                                             color="primary"
-                                            name="firstname"
+                                            name="firstName"
                                             type="text"
                                             ref={register({
                                                 required: true,
