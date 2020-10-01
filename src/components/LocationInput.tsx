@@ -16,9 +16,11 @@ const LocationInput: React.FC = () => {
     const handleSearch = async (value: string) => {
         setSearchText(value);
 
-        // let rst = requestAPI("GET", "LOCATION", null, null, [{key: "name", value: value}])
-        let rst = await requestAPI("GET", "LOCATION", 10)
-        setLocation(rst.data)
+        let rst = requestAPI("GET", "LOCATION", null, null, [{key: "q", value: value}])
+        // let rst = await requestAPI("GET", "LOCATION", 10)
+        
+        console.log(rst)
+        // setLocation(rst.data)
     }
 
     // console.log('location',location)

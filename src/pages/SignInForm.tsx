@@ -231,7 +231,7 @@ const SignInForm: React.FC = () => {
                             </IonRow>
                             <IonRow>
                                 <IonCol size="12">
-                                    {/*<LocationInput/>*/}
+                                    <LocationInput/>
 
 
                                     {/*<IonInput*/}
