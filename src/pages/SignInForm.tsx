@@ -23,7 +23,7 @@ const SignInForm: React.FC = () => {
 
     const [showAlert1, setShowAlert1] = useState(false);
     const [selected, setSelected] = useState<string>("1");
-    const [siret, setSiret] = useState("");
+    // const [siret, setSiret] = useState("");
     const [naf, setNaf] = useState("");
     const [society, setSociety] = useState("");
 
@@ -46,7 +46,7 @@ const SignInForm: React.FC = () => {
                 let activity = await axios.get("https://api.insee.fr/metadonnees/nomenclatures/v1/codes/nafr2/sousClasse/" + nafCode, SIREN_HEADERS)
                 let intitule = activity.data.intitule
 
-                setSiret(siret);
+                // setSiret(siret);
                 setNaf(intitule)
                 setSociety(denomination)
             }
