@@ -31,15 +31,15 @@ const SignInForm: React.FC = () => {
         setSelected(role)
     }
 
-    const handleSIRET = async (siret: string|undefined|null) => {
+    const handleSIRET = async (siret: string | undefined | null) => {
 
-        if(siret) {
+        if (siret) {
             setNaf("");
             setSociety("");
 
             let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + siret, SIREN_HEADERS)
 
-            if(info.data.header.statut === 200) {
+            if (info.data.header.statut === 200) {
                 let denomination = info.data.etablissement.uniteLegale.denominationUniteLegale;
                 let nafCode = info.data.etablissement.uniteLegale.activitePrincipaleUniteLegale
 
@@ -124,55 +124,66 @@ const SignInForm: React.FC = () => {
                                     <IonRadio slot="end" value="2"/>
                                 </IonItem>
                             </IonRadioGroup>
+                        </IonGrid>
 
+                        <IonGrid>
                             <IonText>
                                 <h3>Informations de connexion</h3>
                             </IonText>
                             <IonRow>
                                 <IonCol>
-                                    <IonInput
-                                        className="custom-input"
-                                        name="email"
-                                        type="email"
-                                        ref={register({
-                                            required: true,
-                                            validate: (input) => isEmail(input),
-                                        })}
-                                        style={{borderColor: errors.email && "red"}}
-                                        placeholder="Identifiant"
-                                    />
+                                    <IonLabel>
+                                        Adresse e-mail
+                                        <IonInput
+                                            className="custom-input"
+                                            color="primary"
+                                            name="email"
+                                            type="email"
+                                            ref={register({
+                                                required: true,
+                                                validate: (input) => isEmail(input),
+                                            })}
+                                            style={{borderColor: errors.email && "red"}}
+                                        />
+                                    </IonLabel>
                                     {errors.email &&
                                     <IonText color="danger">L'adresse email est invalide</IonText>}
                                 </IonCol>
                             </IonRow>
                             <IonRow>
                                 <IonCol>
-                                    <IonInput
-                                        className="custom-input"
-                                        name="password"
-                                        type="password"
-                                        ref={register({
-                                            required: true,
-                                            minLength: 8,
-                                        })}
-                                        style={{borderColor: errors.password && "red"}}
-                                        placeholder="Mot de passe"
-                                    />
+                                    <IonLabel>
+                                        Mot de passe
+                                        <IonInput
+                                            className="custom-input"
+                                            color="primary"
+                                            name="password"
+                                            type="password"
+                                            ref={register({
+                                                required: true,
+                                                minLength: 8,
+                                            })}
+                                            style={{borderColor: errors.password && "red"}}
+                                        />
+                                    </IonLabel>
                                     {errors.password &&
                                     <IonText color="danger">Le mot de passe est invalide</IonText>}
                                 </IonCol>
                                 <IonCol size="12">
-                                    <IonInput
-                                        className="custom-input"
-                                        name="password_confirm"
-                                        type="password"
-                                        ref={register({
-                                            required: true,
-                                            minLength: 8,
-                                        })}
-                                        style={{borderColor: errors.password_confirm && "red"}}
-                                        placeholder="Confirmation du mot de passe"
-                                    />
+                                    <IonLabel>
+                                        Confirmation du mot de passe
+                                        <IonInput
+                                            className="custom-input"
+                                            color="primary"
+                                            name="password_confirm"
+                                            type="password"
+                                            ref={register({
+                                                required: true,
+                                                minLength: 8,
+                                            })}
+                                            style={{borderColor: errors.password_confirm && "red"}}
+                                        />
+                                    </IonLabel>
                                     {errors.password_confirm &&
                                     <IonText color="danger">Le mot de passe est invalide</IonText>}
                                 </IonCol>
@@ -184,31 +195,37 @@ const SignInForm: React.FC = () => {
                             </IonText>
                             <IonRow>
                                 <IonCol size="12">
-                                    <IonInput
-                                        className="custom-input"
-                                        name="lastname"
-                                        type="text"
-                                        ref={register({
-                                            required: true,
-                                        })}
-                                        style={{borderColor: errors.lastname && "red"}}
-                                        placeholder="Nom"
-                                    />
+                                    <IonLabel>
+                                        Nom
+                                        <IonInput
+                                            className="custom-input"
+                                            color="primary"
+                                            name="lastname"
+                                            type="text"
+                                            ref={register({
+                                                required: true,
+                                            })}
+                                            style={{borderColor: errors.lastname && "red"}}
+                                        />
+                                    </IonLabel>
                                     {errors.lastname && <IonText color="danger">Le nom est invalide</IonText>}
                                 </IonCol>
                             </IonRow>
                             <IonRow>
                                 <IonCol size="12">
-                                    <IonInput
-                                        className="custom-input"
-                                        name="firstname"
-                                        type="text"
-                                        ref={register({
-                                            required: true,
-                                        })}
-                                        style={{borderColor: errors.firstname && "red"}}
-                                        placeholder="Prénom"
-                                    />
+                                    <IonLabel>
+                                        Prénom
+                                        <IonInput
+                                            className="custom-input"
+                                            color="primary"
+                                            name="firstname"
+                                            type="text"
+                                            ref={register({
+                                                required: true,
+                                            })}
+                                            style={{borderColor: errors.firstname && "red"}}
+                                        />
+                                    </IonLabel>
                                     {errors.firstname && <IonText color="danger">Le prénom est invalide</IonText>}
                                 </IonCol>
                             </IonRow>
@@ -232,16 +249,19 @@ const SignInForm: React.FC = () => {
                             </IonRow>
                             <IonRow>
                                 <IonCol size="12">
-                                    <IonInput
-                                        className="custom-input"
-                                        name="birthdate"
-                                        type="date"
-                                        ref={register({
-                                            required: true,
-                                        })}
-                                        style={{borderColor: errors.birthdate && "red"}}
-                                        placeholder="Date de naissance"
-                                    />
+                                    <IonLabel>
+                                        Date de naissance
+                                        <IonInput
+                                            className="custom-input"
+                                            color="primary"
+                                            name="birthdate"
+                                            type="date"
+                                            ref={register({
+                                                required: true,
+                                            })}
+                                            style={{borderColor: errors.birthdate && "red"}}
+                                        />
+                                    </IonLabel>
                                     {errors.birthdate &&
                                     <IonText color="danger">La date de naissance est invalide</IonText>}
                                 </IonCol>
@@ -250,7 +270,7 @@ const SignInForm: React.FC = () => {
 
                         {
                             selected === "2"
-                            ?
+                                ?
                                 <IonGrid className="my-2">
                                     <IonText>
                                         <h3>Informations professionnelles</h3>
@@ -258,17 +278,20 @@ const SignInForm: React.FC = () => {
 
                                     <IonRow>
                                         <IonCol size="12">
-                                            <IonInput
-                                                className="custom-input"
-                                                name="siret"
-                                                type="text"
-                                                ref={register({
-                                                    required: true,
-                                                })}
-                                                style={{borderColor: errors.siret && "red"}}
-                                                placeholder="Numero SIRET"
-                                                onIonChange={e => handleSIRET(e.detail.value)}
-                                            />
+                                            <IonLabel>
+                                                Numero SIRET
+                                                <IonInput
+                                                    className="custom-input"
+                                                    color="primary"
+                                                    name="siret"
+                                                    type="text"
+                                                    ref={register({
+                                                        required: true,
+                                                    })}
+                                                    style={{borderColor: errors.siret && "red"}}
+                                                    onIonChange={e => handleSIRET(e.detail.value)}
+                                                />
+                                            </IonLabel>
 
                                             {errors.siret &&
                                             <IonText color="danger">Le numero SIRET est invalide</IonText>}
@@ -277,46 +300,46 @@ const SignInForm: React.FC = () => {
 
                                     <IonRow>
                                         <IonCol size="12">
-                                            <IonInput
-                                                disabled
-                                                className="custom-input"
-                                                name="naf"
-                                                type="text"
-                                                ref={register({
-                                                    required: true,
-                                                })}
-                                                style={{borderColor: errors.naf && "red"}}
-                                                placeholder="Secteur d'activité"
-                                                value={naf}
-                                            />
-
-                                            {errors.naf &&
-                                            <IonText color="danger">Le code naf est invalide</IonText>}
+                                            <IonLabel>
+                                                Secteur d'activité
+                                                <IonInput
+                                                    readonly
+                                                    className="custom-input"
+                                                    color="secondary"
+                                                    name="activity"
+                                                    type="text"
+                                                    ref={register({
+                                                        required: true,
+                                                    })}
+                                                    style={{borderColor: errors.activity && "red"}}
+                                                    value={naf}
+                                                />
+                                            </IonLabel>
                                         </IonCol>
                                     </IonRow>
 
                                     <IonRow>
                                         <IonCol size="12">
-                                            <IonInput
-                                                disabled
-                                                className="custom-input"
-                                                name="society"
-                                                type="text"
-                                                ref={register({
-                                                    required: true,
-                                                })}
-                                                style={{borderColor: errors.society && "red"}}
-                                                placeholder="Nom de la société"
-                                                value={society}
-                                            />
-
-                                            {errors.society &&
-                                            <IonText color="danger">Le nom de la société</IonText>}
+                                            <IonLabel>
+                                                Nom de la société
+                                                <IonInput
+                                                    readonly
+                                                    className="custom-input"
+                                                    color="secondary"
+                                                    name="society"
+                                                    type="text"
+                                                    ref={register({
+                                                        required: true,
+                                                    })}
+                                                    style={{borderColor: errors.society && "red"}}
+                                                    value={society}
+                                                />
+                                            </IonLabel>
                                         </IonCol>
                                     </IonRow>
                                 </IonGrid>
-                            :
-                            null
+                                :
+                                null
                         }
                         <IonRow className="ion-full-row ion-margin-bottom">
                             <IonButton type="submit" color="primary"
