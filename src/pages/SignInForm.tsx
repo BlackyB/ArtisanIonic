@@ -240,7 +240,7 @@ const SignInForm: React.FC = () => {
                                         hidden
                                         value={location}>{location}
                                     </IonInput>
-                                    {errors.location && <IonText color="danger">La ville est invalide</IonText>}
+                                    {errors.location && <IonText color="danger">Veuillez selectionner une ville dans la liste déroulante</IonText>}
 
                                 </IonCol>
                             </IonRow>
