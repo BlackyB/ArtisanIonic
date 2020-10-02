@@ -12,6 +12,7 @@ import {useForm} from 'react-hook-form';
 import isEmail from "validator/lib/isEmail";
 import {SIREN_HEADERS, requestAPI} from "../API/API";
 import axios from 'axios';
+import LocationInput from "../components/LocationInput";
 
 const SignInForm: React.FC = () => {
 
@@ -23,21 +24,7 @@ const SignInForm: React.FC = () => {
     const [selected, setSelected] = useState<string>("1");
     const [naf, setNaf] = useState("");
     const [society, setSociety] = useState("");
-    const [locations, setLocations] = useState([]);
-
-    const handleSearch = async (value: string) => {
-
-        let rst = await requestAPI("GET", "LOCATION", null, null, [{key: "q", value: value}])
-
-        let optionsTemp: any = [];
-        Object.entries(rst.data).forEach(([key, value]:any) => {
-            return optionsTemp.push(<IonSelectOption value={`${value.id}`} key={key}>{`${value.city.name} (${value.zip.zip})`}</IonSelectOption>);
-        })
-
-        setLocations(optionsTemp)
-    }
-
-
+    const [location, setLocation] = useState("");
 
     const handleRole = (role: string) => {
         setSelected(role)
@@ -243,29 +230,18 @@ const SignInForm: React.FC = () => {
                             <IonRow>
                                 <IonCol size="12">
 
-                                    {/*<LocationInput/>*/}
+                                    <LocationInput setLocation={setLocation}/>
 
-                                    <IonSearchbar type="text" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville/Code Postal"/>
-                                    <IonSelect name="location"  ref={register({
-                                        required: true,
-                                    })}>
-                                        {locations}
-                                    </IonSelect>
+                                    <IonInput
+                                        name="location"
+                                        ref={register({
+                                            required: true,
+                                        })}
+                                        hidden
+                                        value={location}>{location}
+                                    </IonInput>
+                                    {errors.location && <IonText color="danger">La ville est invalide</IonText>}
 
-
-
-
-                                    {/*<IonInput*/}
-                                    {/*    className="custom-input"*/}
-                                    {/*    name="location"*/}
-                                    {/*    type="text"*/}
-                                    {/*    ref={register({*/}
-                                    {/*        required: true,*/}
-                                    {/*    })}*/}
-                                    {/*    style={{borderColor: errors.city && "red"}}*/}
-                                    {/*    placeholder="Ville"*/}
-                                    {/*/>*/}
-                                    {/*{errors.city && <IonText color="danger">La ville est invalide</IonText>}*/}
                                 </IonCol>
                             </IonRow>
                             <IonRow>

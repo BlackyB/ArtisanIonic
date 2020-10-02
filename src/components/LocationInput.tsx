@@ -1,16 +1,11 @@
 import React, {useState} from "react";
 import {IonItem, IonSearchbar, IonSelect, IonSelectOption} from "@ionic/react";
 import {requestAPI} from "../API/API";
-import {register} from "../serviceWorker";
-// import {useForm} from "react-hook-form";
 
-const LocationInput: React.FC = () => {
+const LocationInput = (props: any) => {
 
+    const {setLocation} = props
     const [locations, setLocations] = useState([])
-
-    // const {register, handleSubmit, errors, formState} = useForm({
-    //     mode: "onBlur"
-    // });
 
     const handleSearch = async (value: string) => {
 
@@ -19,6 +14,9 @@ const LocationInput: React.FC = () => {
 
     }
 
+    const handleSelected = (e: any) => {
+        setLocation(e)
+    }
 
     let options: {}[] = [];
     if(locations) {
@@ -28,14 +26,12 @@ const LocationInput: React.FC = () => {
     }
 
     return (
-        <IonItem>
-            <IonSearchbar type="text" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville"/>
-            <IonSelect name="location">
+        <>
+            <IonSearchbar type="text" className="ion-no-padding" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville"/>
+            <IonSelect onIonChange={e => handleSelected(e.detail.value)}>
                 {options}
             </IonSelect>
-        </IonItem>
-
-
+        </>
     )
 }
 
