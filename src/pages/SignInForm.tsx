@@ -320,6 +320,8 @@ const SignInForm: React.FC = () => {
                                                     value={naf}
                                                 />
                                             </IonLabel>
+                                            {errors.activity &&
+                                            <IonText color="danger">Veuillez remplir un numero SIRET valide</IonText>}
                                         </IonCol>
                                     </IonRow>
 
@@ -340,6 +342,8 @@ const SignInForm: React.FC = () => {
                                                     value={company}
                                                 />
                                             </IonLabel>
+                                            {errors.company &&
+                                            <IonText color="danger">Veuillez remplir un numero SIRET valide</IonText>}
                                         </IonCol>
                                     </IonRow>
                                 </IonGrid>
