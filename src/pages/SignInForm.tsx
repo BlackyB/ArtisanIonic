@@ -23,7 +23,7 @@ const SignInForm: React.FC = () => {
     const [showAlert1, setShowAlert1] = useState(false);
     const [selected, setSelected] = useState<string>("1");
     const [naf, setNaf] = useState("");
-    const [society, setSociety] = useState("");
+    const [company, setCompany] = useState("");
     const [location, setLocation] = useState("");
     const [searchText, setSearchText] = useState("");
 
@@ -39,7 +39,7 @@ const SignInForm: React.FC = () => {
 
         if (siret) {
             setNaf("");
-            setSociety("");
+            setCompany("");
 
             let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + siret, SIREN_HEADERS)
 
@@ -51,7 +51,7 @@ const SignInForm: React.FC = () => {
                 let intitule = activity.data.intitule
 
                 setNaf(intitule)
-                setSociety(denomination)
+                setCompany(denomination)
             }
         }
     }
@@ -329,13 +329,13 @@ const SignInForm: React.FC = () => {
                                                     readonly
                                                     className="custom-input"
                                                     color="secondary"
-                                                    name="society"
+                                                    name="company"
                                                     type="text"
                                                     ref={register({
                                                         required: true,
                                                     })}
-                                                    style={{borderColor: errors.society && "red"}}
-                                                    value={society}
+                                                    style={{borderColor: errors.company && "red"}}
+                                                    value={company}
                                                 />
                                             </IonLabel>
                                         </IonCol>
