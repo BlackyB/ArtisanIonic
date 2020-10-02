@@ -1,14 +1,15 @@
 import React, {useState} from "react";
-import {IonItem, IonSearchbar, IonSelect, IonSelectOption} from "@ionic/react";
+import {IonSearchbar, IonSelect, IonSelectOption} from "@ionic/react";
 import {requestAPI} from "../API/API";
 
 const LocationInput = (props: any) => {
 
-    const {setLocation} = props
+    const {setLocation, setSearchText, searchText} = props
     const [locations, setLocations] = useState([])
 
     const handleSearch = async (value: string) => {
 
+        setSearchText(value)
         let rst = await requestAPI("GET", "LOCATION", null, null, [{key: "q", value: value}])
         setLocations(rst.data)
 
@@ -27,7 +28,7 @@ const LocationInput = (props: any) => {
 
     return (
         <>
-            <IonSearchbar type="text" className="ion-no-padding" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville"/>
+            <IonSearchbar type="text" className="ion-no-padding" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville" value={searchText}/>
             <IonSelect onIonChange={e => handleSelected(e.detail.value)}>
                 {options}
             </IonSelect>

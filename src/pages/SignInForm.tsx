@@ -5,7 +5,7 @@ import {
     IonGrid,
     IonCol,
     IonRow,
-    IonContent, IonAlert, IonRadio, IonLabel, IonRadioGroup, IonItem, IonSelect, IonSelectOption, IonSearchbar
+    IonContent, IonAlert, IonRadio, IonLabel, IonRadioGroup, IonItem
 } from "@ionic/react";
 import React, {useState} from "react";
 import {useForm} from 'react-hook-form';
@@ -25,6 +25,11 @@ const SignInForm: React.FC = () => {
     const [naf, setNaf] = useState("");
     const [society, setSociety] = useState("");
     const [location, setLocation] = useState("");
+    const [searchText, setSearchText] = useState("");
+
+    const resetSearch = () => {
+        setSearchText('')
+    }
 
     const handleRole = (role: string) => {
         setSelected(role)
@@ -230,9 +235,10 @@ const SignInForm: React.FC = () => {
                             <IonRow>
                                 <IonCol size="12">
 
-                                    <LocationInput setLocation={setLocation}/>
+                                    <LocationInput setLocation={setLocation} setSearchText={setSearchText} searchText={searchText}/>
 
                                     <IonInput
+                                        onIonChange={resetSearch}
                                         name="location"
                                         ref={register({
                                             required: true,
