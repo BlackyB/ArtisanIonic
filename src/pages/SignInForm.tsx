@@ -290,6 +290,8 @@ const SignInForm: React.FC = () => {
                                                     type="text"
                                                     ref={register({
                                                         required: true,
+                                                        minLength: 14,
+                                                        maxLength: 14,
                                                     })}
                                                     style={{borderColor: errors.siret && "red"}}
                                                     onIonChange={e => handleSIRET(e.detail.value)}
