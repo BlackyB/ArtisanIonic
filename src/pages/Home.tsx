@@ -63,7 +63,7 @@ const Home: React.FC = () => {
                                         <IonCardContent className="ion-padding ion-margin">
                                             <IonText>
                                                 Si vous avez besoin d'un artisan, vous êtes au bon endroit.
-                                                Artisan & Moi vous permet d'être mis en relation avec des artisants au
+                                                Artisan&Moi vous permet d'être mis en relation avec des artisants au
                                                 plus prés
                                                 de chez vous afin de réaliser tous vos projets.
                                             </IonText>

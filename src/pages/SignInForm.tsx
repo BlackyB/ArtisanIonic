@@ -5,15 +5,13 @@ import {
     IonGrid,
     IonCol,
     IonRow,
-    IonContent, IonAlert, IonRadio, IonLabel, IonRadioGroup, IonItem
+    IonContent, IonAlert, IonRadio, IonLabel, IonRadioGroup, IonItem, IonSelect, IonSelectOption, IonSearchbar
 } from "@ionic/react";
 import React, {useState} from "react";
 import {useForm} from 'react-hook-form';
 import isEmail from "validator/lib/isEmail";
 import {SIREN_HEADERS, requestAPI} from "../API/API";
 import axios from 'axios';
-
-import LocationInput from "../components/LocationInput";
 
 const SignInForm: React.FC = () => {
 
@@ -23,9 +21,23 @@ const SignInForm: React.FC = () => {
 
     const [showAlert1, setShowAlert1] = useState(false);
     const [selected, setSelected] = useState<string>("1");
-    // const [siret, setSiret] = useState("");
     const [naf, setNaf] = useState("");
     const [society, setSociety] = useState("");
+    const [locations, setLocations] = useState([]);
+
+    const handleSearch = async (value: string) => {
+
+        let rst = await requestAPI("GET", "LOCATION", null, null, [{key: "q", value: value}])
+
+        let optionsTemp: any = [];
+        Object.entries(rst.data).forEach(([key, value]:any) => {
+            return optionsTemp.push(<IonSelectOption value={`${value.id}`} key={key}>{`${value.city.name} (${value.zip.zip})`}</IonSelectOption>);
+        })
+
+        setLocations(optionsTemp)
+    }
+
+
 
     const handleRole = (role: string) => {
         setSelected(role)
@@ -46,7 +58,6 @@ const SignInForm: React.FC = () => {
                 let activity = await axios.get("https://api.insee.fr/metadonnees/nomenclatures/v1/codes/nafr2/sousClasse/" + nafCode, SIREN_HEADERS)
                 let intitule = activity.data.intitule
 
-                // setSiret(siret);
                 setNaf(intitule)
                 setSociety(denomination)
             }
@@ -231,7 +242,17 @@ const SignInForm: React.FC = () => {
                             </IonRow>
                             <IonRow>
                                 <IonCol size="12">
-                                    <LocationInput/>
+
+                                    {/*<LocationInput/>*/}
+
+                                    <IonSearchbar type="text" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville/Code Postal"/>
+                                    <IonSelect name="location"  ref={register({
+                                        required: true,
+                                    })}>
+                                        {locations}
+                                    </IonSelect>
+
+
 
 
                                     {/*<IonInput*/}

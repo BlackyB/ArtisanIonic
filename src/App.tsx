@@ -57,7 +57,7 @@ const App: React.FC = () => {
                                 <Route exact path="/profile" component={Profile}/>
                                 <Route exact path="/accueil" component={Home}/>
                                 <Route path="/recherche" component={Search}/>}/>
-                                <PrivateRoute exact path="/messages" component={ConversationDetail}/>
+                                <PrivateRoute exact path="/messagerie/conversation" component={ConversationDetail}/>
                                 <PrivateRoute path="/messagerie" component={Conversation}/>
                                 <Route exact path="/inscription" component={SignInForm}/>
                                 <Route exact path="/" render={() => <Redirect to="/accueil"/>}/>
