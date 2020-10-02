@@ -6,7 +6,7 @@ let conversation = [
         user_1_id: 12,
         user_2_id: 27,
         last_message_date: "22/08",
-        last_message_content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        last_message_content: 'Je vous recontacte d\'ici quelques jours avec le devis pour votre cuisine',
         new_message: true,
         other_user: "Marcel Dublanc"
     },
@@ -17,7 +17,7 @@ let conversation = [
         user_2_id: 27,
         img: "https://picsum.photos/400",
         last_message_date: "18/08",
-        last_message_content: 'Pas pouvoir faire ça',
+        last_message_content: 'Désolé mais je ne vais pas être disponible avant 3 semaines',
         new_message: false,
         other_user: "Philippe Bouvier"
     },

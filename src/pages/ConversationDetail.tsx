@@ -57,7 +57,8 @@ const Conversation: React.FC = () => {
 
     const sendMessage = () => {
 
-        let nextSender = testUserIds[Math.round(Math.random() * Math.floor(1))]
+        // let nextSender = testUserIds[Math.round(Math.random() * Math.floor(1))]
+        let nextSender = 27
 
         // @ts-ignore
         if (newMessage) {
