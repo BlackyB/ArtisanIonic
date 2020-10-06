@@ -1,5 +1,6 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import {AuthProvider} from "../context/AuthContext";
+import {requestAPI} from "../API/API";
 
 class Auth extends Component {
 
@@ -18,12 +19,19 @@ class Auth extends Component {
         accessToken: "KDJYGFHZGJDKHILOMKZDJHJGH"
     };
 
-
     data = {};
 
-    initiateLogin = (data:any) => {
-        console.log("Logging in")
-        console.log(data)
+    initiateLogin = async (data:any) => {
+
+        let log = await requestAPI("POST", "LOGIN", null, data)
+
+        if(log.data?.result === true)
+        {
+            return true
+        }
+
+        return false
+
         //TODO
     };
 

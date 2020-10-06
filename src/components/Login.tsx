@@ -1,27 +1,56 @@
-import React from "react";
+import React, {useState} from "react";
 import {AuthConsumer} from "../context/AuthContext";
-import {IonButton, IonCol, IonContent, IonGrid, IonInput, IonRow, IonText} from "@ionic/react";
+import {IonAlert, IonButton, IonCol, IonContent, IonGrid, IonInput, IonRow, IonText} from "@ionic/react";
 import isEmail from "validator/lib/isEmail";
 import {useForm} from "react-hook-form";
 
 const Login: React.FC = () => {
 
-    const {register, handleSubmit, errors, formState} = useForm({
+    const {register, handleSubmit, errors, formState, } = useForm({
         mode: "onBlur"
     });
+    const [invalidLogin, setInvalidLogin] = useState(true)
+    const [inputValue, setInputValue]= useState({});
+
+    // const handleChange = (event:any) => {
+    //     const nameInput = event.target.name;
+    //     const valueInput = event.target.value;
+    //
+    //     const newInputValue = {
+    //         ...inputValue,
+    //         [nameInput]: valueInput,
+    //     };
+    //     setInputValue((newInputValue))
+    // }
+    // const handleSubmit = async (e: any, callback: any) => {
+    //     e.preventDefault();
+    //
+    //     let rst = await callback(inputValue)
+    //     // console.log(inputValue)
+    //     console.log(rst)
+    //
+    //     if(!rst) setInvalidLogin(true)
+    // }
 
     return (
         <AuthConsumer>
             {({initiateLogin}) => (
                 <>
                     <IonContent>
+                        <IonAlert
+                            isOpen={invalidLogin}
+                            onDidDismiss={() => setInvalidLogin(false)}
+                            message={'Veuillez verifier vos informations de connexion.'}
+                            buttons={['OK']}
+                        />
                         <IonGrid className="align-center">
                             <IonRow className="align-center ion-full-row">
                                 <IonCol size="10" size-md="4" className="ion-text-center">
                                     <IonText color="muted">
                                         <h2>Se connecter</h2>
                                     </IonText>
-                                    <form onSubmit={handleSubmit(initiateLogin)}>
+                                    <form onSubmit={ handleSubmit(initiateLogin)}>
+                                    {/*<form onSubmit={ e => { handleSubmit(e, initiateLogin)}}>*/}
                                         <IonGrid className="my-2">
                                             <IonRow>
                                                 <IonCol>
@@ -52,7 +81,7 @@ const Login: React.FC = () => {
                                                         })}
                                                         style={{borderColor: errors.password && "red"}}
                                                         placeholder="Mot de passe"
-                                                    />
+                                                        />
                                                     {errors.password &&
                                                     <IonText color="danger">Le mot de passe est invalide</IonText>}
                                                 </IonCol>
@@ -60,7 +89,7 @@ const Login: React.FC = () => {
                                         </IonGrid>
 
                                         <IonButton type="submit" color="primary"
-                                                   disabled={formState.isSubmitting} className="btn btn-sm btn-primary">
+                                                   disabled={formState.isSubmitting}  className="btn btn-sm btn-primary">
                                             Connexion
                                         </IonButton>
                                     </form>
