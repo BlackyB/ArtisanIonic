@@ -9,8 +9,8 @@ const Login: React.FC = () => {
     const {register, handleSubmit, errors, formState, } = useForm({
         mode: "onBlur"
     });
-    const [invalidLogin, setInvalidLogin] = useState(true)
-    const [inputValue, setInputValue]= useState({});
+    const [invalidLogin, setInvalidLogin] = useState(false);
+    // const [inputValue, setInputValue]= useState({});
 
     // const handleChange = (event:any) => {
     //     const nameInput = event.target.name;
@@ -31,7 +31,10 @@ const Login: React.FC = () => {
     //
     //     if(!rst) setInvalidLogin(true)
     // }
-
+    const onSubmit = async (data:any, callback: any) => {
+        let rst = await callback(data)
+        if(!rst) setInvalidLogin(true)
+    };
     return (
         <AuthConsumer>
             {({initiateLogin}) => (
@@ -49,8 +52,8 @@ const Login: React.FC = () => {
                                     <IonText color="muted">
                                         <h2>Se connecter</h2>
                                     </IonText>
-                                    <form onSubmit={ handleSubmit(initiateLogin)}>
-                                    {/*<form onSubmit={ e => { handleSubmit(e, initiateLogin)}}>*/}
+                                    <form onSubmit={ handleSubmit((e) => onSubmit(e,initiateLogin), () => setInvalidLogin(true ))}>
+
                                         <IonGrid className="my-2">
                                             <IonRow>
                                                 <IonCol>
