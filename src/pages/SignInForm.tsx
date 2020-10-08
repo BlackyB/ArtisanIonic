@@ -23,7 +23,7 @@ const SignInForm: React.FC = () => {
     const [showAlert1, setShowAlert1] = useState(false);
     const [showAlert2, setShowAlert2] = useState(false);
     const [selected, setSelected] = useState<string>("1");
-    const [siret, setSiret] = useState("");
+    const [siret, setSiret] = useState<string>("");
     const [naf, setNaf] = useState("");
     const [company, setCompany] = useState("");
     const [location, setLocation] = useState("");
@@ -38,29 +38,41 @@ const SignInForm: React.FC = () => {
     }
 
     const handleSIRETSearch = (input: string | undefined | null) => {
-        if(input)
+
+        setNaf("");
+        setCompany("");
+
+        let regexp = new RegExp("[0-9]+")
+
+        if(input && regexp.test(input))
         {
-            if(input.length > 13)
+            if(input.length > 14)
             {
-                input = input.slice(0, 13)
+                input = input.replace(' ', "")
+                if(input.length > 14)
+                {
+                    input = input.slice(0, 14)
+                }
             }
+
 
             setSiret(input)
 
-            if(input.length === 13)
+            if(input.length === 14)
             {
-                handleSIRET()
+                handleSIRET(input)
             }
+        }
+        else
+        {
+            setShowAlert2(true)
+            setSiret('')
         }
     }
 
-    const handleSIRET = async () => {
+    const handleSIRET = async (input:string) => {
 
-        if(siret.length === 13) {
-            setNaf("");
-            setCompany("");
-
-            let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + siret, SIREN_HEADERS)
+            let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + input, SIREN_HEADERS)
 
             console.log(info)
 
@@ -81,9 +93,9 @@ const SignInForm: React.FC = () => {
             else
             {
                 setShowAlert2(true)
-                setSiret('')
+                setSiret("")
             }
-        }
+
     }
 
     function onSubmit(data: any) {
@@ -129,7 +141,7 @@ const SignInForm: React.FC = () => {
         <IonAlert
             isOpen={showAlert2}
             onDidDismiss={() => setShowAlert2(false)}
-            message={'Le numero SIRET saisi est invalide'}
+            message={'Le numero SIRET doit être composé de 14 caractères numeriques (Aucun espace)'}
             buttons={['OK']}
         />
 
@@ -324,7 +336,8 @@ const SignInForm: React.FC = () => {
                                                     className="custom-input"
                                                     color="primary"
                                                     name="siret"
-                                                    type="number"
+                                                    type="text"
+                                                    step="1"
                                                     ref={register({
                                                         required: true,
                                                         minLength: 14,
