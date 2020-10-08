@@ -42,7 +42,7 @@ const SignInForm: React.FC = () => {
         setNaf("");
         setCompany("");
 
-        let regexp = new RegExp("[0-9]+")
+        let regexp = new RegExp("[0-9]")
 
         if(input && regexp.test(input))
         {
@@ -55,13 +55,12 @@ const SignInForm: React.FC = () => {
                 }
             }
 
-
-            setSiret(input)
-
             if(input.length === 14)
             {
                 handleSIRET(input)
             }
+
+            setSiret(input)
         }
         else
         {
@@ -72,30 +71,26 @@ const SignInForm: React.FC = () => {
 
     const handleSIRET = async (input:string) => {
 
-            let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + input, SIREN_HEADERS)
+        let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + input, SIREN_HEADERS)
 
-            console.log(info)
+        if (info.data.header.statut === 200) {
+            let denomination = info.data.etablissement.uniteLegale.denominationUniteLegale;
+            let nafCode = info.data.etablissement.uniteLegale.activitePrincipaleUniteLegale
 
-            if (info.data.header.statut === 200) {
-                let denomination = info.data.etablissement.uniteLegale.denominationUniteLegale;
-                let nafCode = info.data.etablissement.uniteLegale.activitePrincipaleUniteLegale
-
-                let activity = await axios.get("https://api.insee.fr/metadonnees/nomenclatures/v1/codes/nafr2/sousClasse/" + nafCode, SIREN_HEADERS)
-                if(activity)
-                {
-                    let intitule = activity.data.intitule
-
-                    setNaf(intitule)
-                    setCompany(denomination)
-                }
-
-            }
-            else
+            let activity = await axios.get("https://api.insee.fr/metadonnees/nomenclatures/v1/codes/nafr2/sousClasse/" + nafCode, SIREN_HEADERS)
+            if(activity)
             {
-                setShowAlert2(true)
-                setSiret("")
-            }
+                let intitule = activity.data.intitule
 
+                setNaf(intitule)
+                setCompany(denomination)
+            }
+        }
+        else
+        {
+            setShowAlert2(true)
+            setSiret("")
+        }
     }
 
     function onSubmit(data: any) {
