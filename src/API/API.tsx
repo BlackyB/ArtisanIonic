@@ -12,7 +12,7 @@ export const SIREN_HEADERS = {
 const Entity: { key: string, url: string }[] = [
     {
         key: "LOGIN",
-        url: "/user/loogin",
+        url: "/user/login",
     },
     {
         key: "LOCATION",
@@ -40,6 +40,11 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
 
     let url: string = API_ROOT;
 
+    let auth: string| null = null
+
+    if(localStorage.getItem('token')) auth = localStorage.getItem('token');
+
+
     if (entity) {
         let endpoint_filter: { key: string; url: string; }[] = Entity.filter((item) => {
             return item.key === entity
@@ -58,8 +63,37 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
     }
 
     switch (method) {
-        case "GET":
-            return axios.get(url)
+        // case "GET":
+        //     axios({
+        //         method: "GET",
+        //         url: url,
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-AUTH-TOKEN': auth
+        //         },
+        //     })
+        //     .then((response) => {
+        //     return {
+        //         status: response.status,
+        //         statusText: response.statusText,
+        //         data: response.data
+        //     }
+        // })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+        //
+        //     break;
+
+        case "POST":
+            return axios({
+                method: "POST",
+                url: url,
+                headers: {
+                    "X-AUTH-TOKEN": auth,
+                },
+                data: data
+            })
                 .then((response) => {
                     return {
                         status: response.status,
@@ -71,17 +105,29 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
                     console.log(error);
                 });
 
-        case "POST" :
-            return axios.post(url, data)
-                .then((response) => {
-                    return {
-                        status: response.status,
-                        statusText: response.statusText,
-                        data: response.data
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            // return axios.get(url, config)
+            //     .then((response) => {
+            //         return {
+            //             status: response.status,
+            //             statusText: response.statusText,
+            //             data: response.data
+            //         }
+            //     })
+            //     .catch(function (error) {
+            //         console.log(error);
+            //     });
+
+        // case "POST" :
+        //     return axios.post(url, data)
+        //         .then((response) => {
+        //             return {
+        //                 status: response.status,
+        //                 statusText: response.statusText,
+        //                 data: response.data
+        //             }
+        //         })
+        //         .catch(function (error) {
+        //             console.log(error);
+        //         });
     }
 }

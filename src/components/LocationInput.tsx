@@ -9,10 +9,15 @@ const LocationInput = (props: any) => {
 
     const handleSearch = async (value: string) => {
 
-        setSearchText(value)
-        let rst = await requestAPI("GET", "LOCATION", null, null, [{key: "q", value: value}])
-        setLocations(rst.data)
-
+        if(value)
+        {
+            setSearchText(value)
+            let rst = await requestAPI("GET", "LOCATION", null, null, [{key: "q", value: value}])
+            if(rst)
+            {
+                setLocations(rst.data)
+            }
+        }
     }
 
     const handleSelected = (e: any) => {

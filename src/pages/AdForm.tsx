@@ -5,7 +5,7 @@ import {
     IonGrid,
     IonCol,
     IonRow,
-    IonContent, IonAlert, IonRadio, IonLabel, IonRadioGroup, IonItem, IonTextarea
+    IonContent, IonLabel, IonTextarea
 } from "@ionic/react";
 import React, {useRef, useState} from "react";
 import {useForm} from 'react-hook-form';

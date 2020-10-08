@@ -24,9 +24,10 @@ class Auth extends Component {
     initiateLogin = async (data:any) => {
 
         let log = await requestAPI("POST", "LOGIN", null, data)
-        if(log.data?.result === true)
+        if(log?.data?.result === true)
         {
             this.setSession(log.data.user)
+            localStorage.setItem('token', log.data.user.token)
         }
 
         return false
