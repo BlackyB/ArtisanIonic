@@ -36,13 +36,18 @@ const Entity: { key: string, url: string }[] = [
     }
 ]
 
-export const requestAPI = (method: string, entity?: string, id?: number | null, data?: [] | null, options?: { key: string, value: string }[]): any => {
+export const requestAPI = (method: string, entity?: string, id?: number | null, data?: [] | null, options?: { key: string, value: string }[], apiKey: boolean = false): any => {
 
     let url: string = API_ROOT;
 
-    let auth: string| null = null
+    let config = undefined
 
-    if(localStorage.getItem('token')) auth = localStorage.getItem('token');
+    if(apiKey)
+    {
+        let auth: string| null = null
+        if(localStorage.getItem('token')) auth = localStorage.getItem('token');
+        config = {headers: {'X-AUTH-TOKEN': auth}}
+    }
 
 
     if (entity) {
@@ -63,37 +68,8 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
     }
 
     switch (method) {
-        // case "GET":
-        //     axios({
-        //         method: "GET",
-        //         url: url,
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'X-AUTH-TOKEN': auth
-        //         },
-        //     })
-        //     .then((response) => {
-        //     return {
-        //         status: response.status,
-        //         statusText: response.statusText,
-        //         data: response.data
-        //     }
-        // })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-        //
-        //     break;
-
-        case "POST":
-            return axios({
-                method: "POST",
-                url: url,
-                headers: {
-                    "X-AUTH-TOKEN": auth,
-                },
-                data: data
-            })
+        case "GET":
+            return axios.get(url, config)
                 .then((response) => {
                     return {
                         status: response.status,
@@ -105,29 +81,17 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
                     console.log(error);
                 });
 
-            // return axios.get(url, config)
-            //     .then((response) => {
-            //         return {
-            //             status: response.status,
-            //             statusText: response.statusText,
-            //             data: response.data
-            //         }
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
-
-        // case "POST" :
-        //     return axios.post(url, data)
-        //         .then((response) => {
-        //             return {
-        //                 status: response.status,
-        //                 statusText: response.statusText,
-        //                 data: response.data
-        //             }
-        //         })
-        //         .catch(function (error) {
-        //             console.log(error);
-        //         });
+        case "POST" :
+            return axios.post(url, data, config)
+                .then((response) => {
+                    return {
+                        status: response.status,
+                        statusText: response.statusText,
+                        data: response.data
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
     }
 }
