@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-// const API_KEY: string = "<YOUR_API_KEY_HERE>";
-// const API_ROOT: string      = `https://newsapi.org/&apiKey=${API_KEY}`;
 const API_ROOT: string = "http://146.59.144.65/api";
 
-const SIREN_TOKEN = "149c1ee8-c9e8-3986-9d60-b2f0c24c8097"
+const SIREN_TOKEN = "40d6f9cf-e6c5-3ef0-b1c4-a23893288fc0"
 export const SIREN_HEADERS = {
     headers: {Authorization: `Bearer ${SIREN_TOKEN}`}
 };

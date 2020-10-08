@@ -21,7 +21,9 @@ const SignInForm: React.FC = () => {
     });
 
     const [showAlert1, setShowAlert1] = useState(false);
+    const [showAlert2, setShowAlert2] = useState(false);
     const [selected, setSelected] = useState<string>("1");
+    const [siret, setSiret] = useState("");
     const [naf, setNaf] = useState("");
     const [company, setCompany] = useState("");
     const [location, setLocation] = useState("");
@@ -35,23 +37,51 @@ const SignInForm: React.FC = () => {
         setSelected(role)
     }
 
-    const handleSIRET = async (siret: string | undefined | null) => {
+    const handleSIRETSearch = (input: string | undefined | null) => {
+        if(input)
+        {
+            if(input.length > 13)
+            {
+                input = input.slice(0, 13)
+            }
 
-        if (siret) {
+            setSiret(input)
+
+            if(input.length === 13)
+            {
+                handleSIRET()
+            }
+        }
+    }
+
+    const handleSIRET = async () => {
+
+        if(siret.length === 13) {
             setNaf("");
             setCompany("");
 
             let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + siret, SIREN_HEADERS)
+
+            console.log(info)
 
             if (info.data.header.statut === 200) {
                 let denomination = info.data.etablissement.uniteLegale.denominationUniteLegale;
                 let nafCode = info.data.etablissement.uniteLegale.activitePrincipaleUniteLegale
 
                 let activity = await axios.get("https://api.insee.fr/metadonnees/nomenclatures/v1/codes/nafr2/sousClasse/" + nafCode, SIREN_HEADERS)
-                let intitule = activity.data.intitule
+                if(activity)
+                {
+                    let intitule = activity.data.intitule
 
-                setNaf(intitule)
-                setCompany(denomination)
+                    setNaf(intitule)
+                    setCompany(denomination)
+                }
+
+            }
+            else
+            {
+                setShowAlert2(true)
+                setSiret('')
             }
         }
     }
@@ -93,6 +123,13 @@ const SignInForm: React.FC = () => {
             isOpen={showAlert1}
             onDidDismiss={() => setShowAlert1(false)}
             message={'Les mots de passe ne sont pas identiques'}
+            buttons={['OK']}
+        />
+
+        <IonAlert
+            isOpen={showAlert2}
+            onDidDismiss={() => setShowAlert2(false)}
+            message={'Le numero SIRET saisi est invalide'}
             buttons={['OK']}
         />
 
@@ -287,14 +324,15 @@ const SignInForm: React.FC = () => {
                                                     className="custom-input"
                                                     color="primary"
                                                     name="siret"
-                                                    type="text"
+                                                    type="number"
                                                     ref={register({
                                                         required: true,
                                                         minLength: 14,
                                                         maxLength: 14,
                                                     })}
+                                                    value={siret}
                                                     style={{borderColor: errors.siret && "red"}}
-                                                    onIonChange={e => handleSIRET(e.detail.value)}
+                                                    onIonChange={e => handleSIRETSearch(e.detail.value)}
                                                 />
                                             </IonLabel>
 
