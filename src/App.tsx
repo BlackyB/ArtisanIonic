@@ -20,6 +20,7 @@ import ConversationDetail from './pages/ConversationDetail';
 import Auth from './classes/Auth'
 import SignInForm from "./pages/SignInForm";
 import PrivateRoute from "./components/PrivateRoute";
+import AdForm from "./pages/AdForm";
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -42,10 +43,8 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import './App.css';
 
+
 const App: React.FC = () => {
-
-    // const [user, setUser] = useState(Auth);
-
 
     return (
         <IonApp>
@@ -60,6 +59,7 @@ const App: React.FC = () => {
                                 <PrivateRoute exact path="/messagerie/conversation" component={ConversationDetail}/>
                                 <PrivateRoute path="/messagerie" component={Conversation}/>
                                 <Route exact path="/inscription" component={SignInForm}/>
+                                <Route exact path="/profile/annonce" component={AdForm}/>
                                 <Route exact path="/" render={() => <Redirect to="/accueil"/>}/>
                             </Switch>
                         </IonRouterOutlet>

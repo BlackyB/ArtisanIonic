@@ -12,7 +12,7 @@ export const SIREN_HEADERS = {
 const Entity: { key: string, url: string }[] = [
     {
         key: "LOGIN",
-        url: "/user/login",
+        url: "/user/loogin",
     },
     {
         key: "LOCATION",
@@ -20,7 +20,11 @@ const Entity: { key: string, url: string }[] = [
     },
     {
         key: "ADS",
-        url: "/ads",
+        url: "/ad/ads",
+    },
+    {
+        key: "AD_ADD",
+        url: "/ad/add",
     },
     {
         key: "USER",

@@ -1,11 +1,11 @@
-import React, {Component, useState} from "react";
+import React, {Component} from "react";
 import {AuthProvider} from "../context/AuthContext";
 import {requestAPI} from "../API/API";
 
 class Auth extends Component {
 
     defaultUser = {
-        role: "visitor",
+        role: "1",
         email: "",
         firstname: "",
         lastname: ""
@@ -16,7 +16,7 @@ class Auth extends Component {
         user: {
             ...this.defaultUser
         },
-        accessToken: "KDJYGFHZGJDKHILOMKZDJHJGH"
+        accessToken: ""
     };
 
     data = {};
@@ -24,10 +24,9 @@ class Auth extends Component {
     initiateLogin = async (data:any) => {
 
         let log = await requestAPI("POST", "LOGIN", null, data)
-
         if(log.data?.result === true)
         {
-            return true
+            this.setSession(log.data.user)
         }
 
         return false
@@ -59,17 +58,18 @@ class Auth extends Component {
         // });
     };
 
-    setSession(data: { sub: any; email: any; roleUrl: any; accessToken: any; }) {
-        // const user = {
-        //     id: data.sub,
-        //     email: data.email,
-        //     role: data.roleUrl
-        // };
-        // this.setState({
-        //     authenticated: true,
-        //     accessToken: data.accessToken,
-        //     user
-        // });
+    setSession(data: any) {
+        const user = {
+            role: data.role.id,
+            email: data.email,
+            firstname: data.firstName,
+            lastname: data.lastName
+        };
+        this.setState({
+            authenticated: true,
+            accessToken: "",
+            user
+        });
     }
 
     render() {

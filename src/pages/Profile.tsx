@@ -15,15 +15,16 @@ const Profile: React.FC = () => {
                         <PageTitle pageTitle={"Mon compte"}/>
                         <IonContent fullscreen>
                             <IonRow>
-                                {console.log()}
 
                                 <p>{user?.role}</p>
+
                                 {/*TODO PAGE MON COMPTE*/}
+
                                 <IonCol size-md="3"/>
                                 <IonCol size="12" size-md="6">
                                     <IonRow>
                                         <IonCol className="ion-text-center">
-                                            <IonButton>Poster une annonce</IonButton>
+                                            <IonButton href="/profile/annonce">Poster une annonce</IonButton>
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
