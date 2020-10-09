@@ -1,26 +1,24 @@
 import React, {useState} from 'react';
 import {
     IonCol,
-    IonContent, IonGrid,
-    IonHeader,
-    IonItem,
+    IonContent, IonGrid, IonInfiniteScroll, IonInfiniteScrollContent,
     IonPage,
     IonRow,
     IonSearchbar, IonSpinner,
-    IonText
 } from '@ionic/react';
 import PageTitle from "../components/PageTitle";
 import {requestAPI} from "../API/API";
 import Ad from "./Ad";
 
-
 const Search = () => {
 
     const [searchText, setSearchText] = useState('')
-    const [searchResult, setSearchResult] = useState(null)
+    const [searchResult, setSearchResult] = useState(undefined)
     const [recentAd, setRecentAd] = useState()
     const [loading, setLoading] = useState(false)
     const [recentAdLoaded, setRecentAdLoaded] = useState(false)
+
+    const [page, setPage] = useState(1)
 
     const loadRecentAds = async () => {
         try {
@@ -37,24 +35,49 @@ const Search = () => {
         setRecentAdLoaded(true)
     }
 
-    const handleSearch = async (value: string) => {
-        setSearchText(value)
+    const handleSearch = async (value: any) => {
+
+        let nextPage = page
+
+        if (searchText !== value) {
+            nextPage = 1
+            setPage(1)
+            setSearchText(value)
+        } else {
+            nextPage++
+            setPage(nextPage)
+        }
 
         if (value) {
             try {
                 setLoading(true)
-                let ads = await requestAPI("GET", "ADS", null, null, [{key: "title", value: value}])
-                setSearchResult(ads.data)
+                let ads = await requestAPI("GET", "ADS", null, null, [{
+                    key: "page",
+                    value: nextPage.toString()
+                }, {key: "title", value: value}])
+
+                if (searchText === value && searchResult) {
+                    // @ts-ignore
+                    setSearchResult(searchResult.concat(ads.data))
+                } else {
+                    setSearchResult(ads.data)
+                }
+
             } catch {
-                setSearchResult(null)
+                setSearchResult(undefined)
             }
 
             setLoading(false)
+
         } else {
-            setSearchResult(null)
+            setLoading(false)
+            setSearchResult(undefined)
         }
+    }
 
-
+    const handleScroll = (event: CustomEvent<void>) => {
+        handleSearch(searchText);
+        (event.target as HTMLIonInfiniteScrollElement).complete()
     }
 
 
@@ -72,32 +95,31 @@ const Search = () => {
                                               debounce={500}
                                               showCancelButton="focus"/>
                             </IonCol>
-
-                            {/*<IonCol size="12" size-md="5">*/}
-                            {/*    <IonSelect placeholder="Zone géographique" value="0" className="ion-text-center">*/}
-                            {/*        <IonSelectOption value="0">Partout en France</IonSelectOption>*/}
-                            {/*        /!*<option value={user.location.region.id}>Dans ma région ({user.location.region.name})</option>*!/*/}
-                            {/*        /!*<option value={user.location.departement.id}>Dans mon departement ({user.location.departement.code})</option>*!/*/}
-                            {/*        /!*<option value={user.location.city.id}>Dans ma ville {user.location.city.name} {user.location.city.zip}</option>*!/*/}
-                            {/*    </IonSelect>*/}
-                            {/*</IonCol>*/}
                         </IonRow>
 
-                        {loading ?
-                            <IonRow className="ion-justify-content-center">
-                                <IonSpinner name="crescent"/>
-                            </IonRow>
-
-                            : null
+                        {loading
+                            ?
+                                <IonRow className="ion-justify-content-center">
+                                    <IonSpinner name="crescent"/>
+                                </IonRow>
+                            :
+                                null
                         }
 
-                        {console.log(searchResult)}
                         {searchResult ?
-                            <IonRow className="ion-justify-content-center">
-                                <IonCol size="10" size-md="6">
-                                    <Ad title="Résultat de la recherche" ad={searchResult}/>
-                                </IonCol>
-                            </IonRow>
+                            <>
+                                <IonRow className="ion-justify-content-center">
+                                    <IonCol size="10" size-md="6">
+                                        <Ad title="Résultat de la recherche" ad={searchResult}/>
+                                    </IonCol>
+                                </IonRow>
+                                <IonInfiniteScroll threshold="20%" onIonInfinite={(e: CustomEvent<void>) => handleScroll(e)}>
+                                    <IonInfiniteScrollContent
+                                        loadingSpinner="bubbles"
+                                        loadingText="Chargement des annonces suivantes...">
+                                    </IonInfiniteScrollContent>
+                                </IonInfiniteScroll>
+                            </>
                             :
                             null
                         }
