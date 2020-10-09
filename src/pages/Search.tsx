@@ -6,37 +6,33 @@ import {
     IonItem,
     IonPage,
     IonRow,
-    IonSearchbar,
-    IonSelect,
-    IonSelectOption, IonText
+    IonSearchbar, IonSpinner,
+    IonText
 } from '@ionic/react';
 import PageTitle from "../components/PageTitle";
 import {requestAPI} from "../API/API";
-import conversation from "../DataOffline/Conversations";
 import Ad from "./Ad";
 
 
 const Search = () => {
 
     const [searchText, setSearchText] = useState('')
-    const [searchResult, setSearchResult] = useState([])
+    const [searchResult, setSearchResult] = useState(null)
     const [recentAd, setRecentAd] = useState()
+    const [loading, setLoading] = useState(false)
     const [recentAdLoaded, setRecentAdLoaded] = useState(false)
 
     const loadRecentAds = async () => {
-        try{
+        try {
             let ads = await requestAPI("GET", "RECENT_ADS")
 
             setRecentAd(ads.data)
-        }
-        catch
-        {
+        } catch {
             return null
         }
     }
 
-    if(!recentAdLoaded)
-    {
+    if (!recentAdLoaded) {
         loadRecentAds()
         setRecentAdLoaded(true)
     }
@@ -44,16 +40,22 @@ const Search = () => {
     const handleSearch = async (value: string) => {
         setSearchText(value)
 
-        try{
-            let ads = await requestAPI("GET", "ADS", null, null, [{key: "title", value: value }])
-            setSearchResult(ads.data)
-        }
-        catch
-        {
-            setSearchResult([])
-        }
-    }
+        if (value) {
+            try {
+                setLoading(true)
+                let ads = await requestAPI("GET", "ADS", null, null, [{key: "title", value: value}])
+                setSearchResult(ads.data)
+            } catch {
+                setSearchResult(null)
+            }
 
+            setLoading(false)
+        } else {
+            setSearchResult(null)
+        }
+
+
+    }
 
 
     return (
@@ -64,7 +66,9 @@ const Search = () => {
                     <IonGrid>
                         <IonRow className="ion-justify-content-center">
                             <IonCol size="12" size-md="6">
-                                <IonSearchbar value={searchText} placeholder="Que recherchez-vous ?" onIonChange={e => handleSearch(e.detail.value!)} showCancelButton="focus"/>
+                                <IonSearchbar value={searchText} placeholder="Que recherchez-vous ?"
+                                              onIonChange={e => handleSearch(e.detail.value!)}
+                                              showCancelButton="focus"/>
                             </IonCol>
 
                             {/*<IonCol size="12" size-md="5">*/}
@@ -77,6 +81,15 @@ const Search = () => {
                             {/*</IonCol>*/}
                         </IonRow>
 
+                        {loading ?
+                            <IonRow className="ion-justify-content-center">
+                                <IonSpinner name="crescent"/>
+                            </IonRow>
+
+                            : null
+                        }
+
+                        {console.log(searchResult)}
                         {searchResult ?
                             <IonRow className="ion-justify-content-center">
                                 <IonCol size="10" size-md="6">
