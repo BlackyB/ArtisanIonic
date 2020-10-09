@@ -1,11 +1,14 @@
 import React from 'react';
-import {IonCol, IonRow, IonGrid} from '@ionic/react';
+import {IonCol, IonRow, IonGrid, IonText} from '@ionic/react';
 import '../App.css';
 
 const Ad = (props: any) => {
     let data = colAd(props.ad)
     return (
         <IonGrid>
+            <IonText className="ion-text-center">
+                <h3>{props.title}</h3>
+            </IonText>
             {data}
         </IonGrid>
     )

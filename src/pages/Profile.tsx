@@ -28,7 +28,7 @@ const Profile: React.FC = () => {
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
-                                        <Ad ad={['un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze']}/>
+                                        <Ad title="Mes annonces" ad={['un', 'deux', 'trois', 'quatre']}/>
                                     </IonRow>
                                 </IonCol>
                                 <IonCol size-md="3"/>

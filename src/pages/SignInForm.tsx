@@ -330,7 +330,6 @@ const SignInForm: React.FC = () => {
                                                         value={siret}
                                                         style={{borderColor: errors.siret && "red"}}
                                                         onIonChange={e => handleSIRETSearch(e.detail.value)}
-                                                        debounce={500}
                                                     />
                                                 </IonLabel>
 
