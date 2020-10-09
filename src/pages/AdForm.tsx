@@ -29,7 +29,7 @@ const AdForm: React.FC = () => {
 
     const onSubmit = (data: any) => {
 
-        requestAPI("POST", "AD_ADD", null, data)
+        requestAPI("POST", "AD_ADD", null, data, [], true)
     }
 
 
