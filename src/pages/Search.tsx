@@ -68,6 +68,8 @@ const Search = () => {
                             <IonCol size="12" size-md="6">
                                 <IonSearchbar value={searchText} placeholder="Que recherchez-vous ?"
                                               onIonChange={e => handleSearch(e.detail.value!)}
+                                              animated
+                                              debounce={500}
                                               showCancelButton="focus"/>
                             </IonCol>
 

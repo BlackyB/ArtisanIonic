@@ -122,7 +122,7 @@ const SignInForm: React.FC = () => {
             <IonAlert
                 isOpen={showAlert2}
                 onDidDismiss={() => setShowAlert2(false)}
-                message={'Nous n\'avons pas pu trouver votre entreprise. Veuillez verifier votre numero SIRET (14 caractères numeriques, pas d\'espaces blancs'}
+                message={'Nous n\'avons pas pu trouver votre entreprise. Veuillez verifier votre numero SIRET (14 caractères numeriques sans espace blanc'}
                 buttons={['OK']}
             />
 
@@ -330,6 +330,7 @@ const SignInForm: React.FC = () => {
                                                         value={siret}
                                                         style={{borderColor: errors.siret && "red"}}
                                                         onIonChange={e => handleSIRETSearch(e.detail.value)}
+                                                        debounce={500}
                                                     />
                                                 </IonLabel>
 

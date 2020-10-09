@@ -33,7 +33,7 @@ const LocationInput = (props: any) => {
 
     return (
         <>
-            <IonSearchbar type="text" className="ion-no-padding" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville" value={searchText}/>
+            <IonSearchbar type="text" className="ion-no-padding" onIonChange={e => handleSearch(e.detail.value!)} animated placeholder="Ville" value={searchText} debounce={500}/>
             <IonSelect onIonChange={e => handleSelected(e.detail.value)}>
                 {options}
             </IonSelect>
