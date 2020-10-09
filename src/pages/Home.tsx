@@ -13,7 +13,6 @@ import {
     IonText,
 } from '@ionic/react';
 import PageTitle from "../components/PageTitle";
-import './Home.css';
 import {requestAPI} from "../API/API";
 
 const Home: React.FC = () => {
@@ -26,22 +25,10 @@ const Home: React.FC = () => {
         grabCursor: true
     };
 
-    const handleClick = () => {
-        requestAPI("GET", "USER", 1)
-    }
-
-
-    // get()
-    // console.log(get())
-    // console.log(get('ADS'))
-    // console.log(get('LOGIN', 2))
-    // console.log(get('ADS', 10, [{key: "age", value: "12"}, {key: "size", value: "180cm"}] ))
-
     return (
         <IonPage className={"opacity"}>
             <PageTitle pageTitle={"Accueil"}/>
             <IonContent>
-                <IonButton onClick={handleClick}>GET</IonButton>
                 <IonGrid className="ion-no-padding">
 
                     <IonRow className="ion-padding-vertical">
@@ -278,22 +265,19 @@ const Home: React.FC = () => {
                                     <IonSlides>
                                         <IonSlide>
                                             <IonCol>
-                                                <h4>"Je tiens à vous dire toute ma satisfaction quant à votre site
-                                                    internet"</h4>
+                                                <h4>"Je tiens à vous dire toute ma satisfaction quant à votre application"</h4>
                                                 <p>Mme Martin</p>
                                             </IonCol>
                                         </IonSlide>
                                         <IonSlide>
                                             <IonCol>
-                                                <h4>"J'ai trouvé un artisan plombier dans les 24h pour installer ma
-                                                    nouvelle douche, super"</h4>
+                                                <h4>"J'ai trouvé un artisan plombier dans les 24h pour installer ma nouvelle douche, super"</h4>
                                                 <p>Mr Simon</p>
                                             </IonCol>
                                         </IonSlide>
                                         <IonSlide>
                                             <IonCol>
-                                                <h4>"Sans ce site je n'aurai jamais pu trouver Mr Armand qui a refait ma
-                                                    toiture</h4>
+                                                <h4>"Sans cette application je n'aurai jamais pu trouver Mr Armand qui a refait ma toiture</h4>
                                                 <p>Mme Vincelli</p>
                                             </IonCol>
                                         </IonSlide>
