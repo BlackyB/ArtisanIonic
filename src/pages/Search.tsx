@@ -1,35 +1,109 @@
 import React, {useState} from 'react';
-import {IonContent, IonHeader, IonItem, IonPage, IonSearchbar} from '@ionic/react';
+import {
+    IonCol,
+    IonContent, IonGrid,
+    IonHeader,
+    IonItem,
+    IonPage,
+    IonRow,
+    IonSearchbar,
+    IonSelect,
+    IonSelectOption, IonText
+} from '@ionic/react';
 import PageTitle from "../components/PageTitle";
+import {requestAPI} from "../API/API";
+import conversation from "../DataOffline/Conversations";
+import Ad from "./Ad";
 
 
 const Search = () => {
 
     const [searchText, setSearchText] = useState('')
+    const [searchResult, setSearchResult] = useState([])
+    const [recentAd, setRecentAd] = useState()
+    const [recentAdLoaded, setRecentAdLoaded] = useState(false)
+
+    const loadRecentAds = async () => {
+        try{
+            let ads = await requestAPI("GET", "RECENT_ADS")
+
+            setRecentAd(ads.data)
+        }
+        catch
+        {
+            return null
+        }
+    }
+
+    if(!recentAdLoaded)
+    {
+        loadRecentAds()
+        setRecentAdLoaded(true)
+    }
+
+    const handleSearch = async (value: string) => {
+        setSearchText(value)
+
+        try{
+            let ads = await requestAPI("GET", "ADS", null, null, [{key: "title", value: value }])
+            setSearchResult(ads.data)
+        }
+        catch
+        {
+            setSearchResult([])
+        }
+    }
+
+
 
     return (
         <IonContent>
             <IonPage>
                 <PageTitle pageTitle={"Recherche"}/>
                 <IonContent fullscreen>
-                    <IonHeader collapse="condense">
-                        <IonItem>
+                    <IonGrid>
+                        <IonRow className="ion-justify-content-center">
+                            <IonCol size="12" size-md="6">
+                                <IonSearchbar value={searchText} placeholder="Que recherchez-vous ?" onIonChange={e => handleSearch(e.detail.value!)} showCancelButton="focus"/>
+                            </IonCol>
 
-                            {/*<select>*/}
-                            {/*    <option value="0">Partout en France</option>*/}
-                            {/*    <option value={user.location.region.id}>Dans ma région ({user.location.region.name})</option>*/}
-                            {/*    <option value={user.location.departement.id}>Dans mon departement ({user.location.departement.code})</option>*/}
-                            {/*    <option value={user.location.city.id}>Dans ma ville ({user.location.city.name} {user.location.city.zip)}</option>*/}
-                            {/*</select>*/}
-                        </IonItem>
-                    </IonHeader>
-                    <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}
-                                  showCancelButton="focus"/>
+                            {/*<IonCol size="12" size-md="5">*/}
+                            {/*    <IonSelect placeholder="Zone géographique" value="0" className="ion-text-center">*/}
+                            {/*        <IonSelectOption value="0">Partout en France</IonSelectOption>*/}
+                            {/*        /!*<option value={user.location.region.id}>Dans ma région ({user.location.region.name})</option>*!/*/}
+                            {/*        /!*<option value={user.location.departement.id}>Dans mon departement ({user.location.departement.code})</option>*!/*/}
+                            {/*        /!*<option value={user.location.city.id}>Dans ma ville {user.location.city.name} {user.location.city.zip}</option>*!/*/}
+                            {/*    </IonSelect>*/}
+                            {/*</IonCol>*/}
+                        </IonRow>
 
+                        {searchResult ?
+                            <IonRow className="ion-justify-content-center">
+                                <IonCol size="10" size-md="6">
+                                    <IonText className="ion-text-center">
+                                        <h3>Résultat de la recherche</h3>
+                                    </IonText>
+                                    <Ad ad={searchResult}/>
+                                </IonCol>
+                            </IonRow>
+                            :
+                            null
+                        }
 
-                    <p>toto</p>
-                    {/*<p>{user.user_data.name}</p>*/}
+                        {recentAd ?
+                            <IonRow className="ion-justify-content-center">
+                                <IonCol size="10" size-md="6">
+                                    <IonText className="ion-text-center">
+                                        <h3>Dernières Annonces</h3>
+                                    </IonText>
+                                    <Ad ad={recentAd}/>
+                                </IonCol>
+                            </IonRow>
+                            :
+                            null
+                        }
 
+                    </IonGrid>
                 </IonContent>
             </IonPage>
         </IonContent>

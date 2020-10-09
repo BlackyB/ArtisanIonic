@@ -125,3 +125,8 @@ ion-grid{
 .color-dark{
     color: #000000 !important;
 }
+
+.hover-ad:hover{
+    opacity: 80%;
+    cursor: pointer;
+}

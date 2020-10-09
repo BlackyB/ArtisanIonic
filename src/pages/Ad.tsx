@@ -11,13 +11,15 @@ const Ad = (props: any) => {
     )
 }
 
-export const colAd = (data: any) => {
+const colAd = (data: any) => {
     let tableRender: any = [];
     let columns: any = [];
     data.forEach((ad: any, i: any) => {
+        let img = ad?.img ? ad.img : "/assets/image/empty.png";
         columns.push(
-            <IonCol size="4" className={"ion-text-center"}>
-                <img src={"https://picsum.photos/id/" + i * i +  "/200/200"} alt=""/>
+            <IonCol size="4">
+                <img className={"hover-ad"} src={img} alt=""/>
+                <p className={"ion-text-center "}>{ad.title}</p>
             </IonCol>
         );
         if ((i + 1) % 3 === 0) {
