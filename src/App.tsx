@@ -21,6 +21,7 @@ import Auth from './classes/Auth'
 import SignInForm from "./pages/SignInForm";
 import PrivateRoute from "./components/PrivateRoute";
 import AdForm from "./pages/AdForm";
+import AdDetail from "./components/AdDetail";
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -55,7 +56,8 @@ const App: React.FC = () => {
                             <Switch>
                                 <Route exact path="/profile" component={Profile}/>
                                 <Route exact path="/accueil" component={Home}/>
-                                <Route path="/recherche" component={Search}/>}/>
+                                <Route exact path="/recherche" component={Search}/>}/>
+                                <Route path="/recherche/:id" component={AdDetail}/>
                                 <PrivateRoute exact path="/messagerie/conversation" component={ConversationDetail}/>
                                 <PrivateRoute path="/messagerie" component={Conversation}/>
                                 <Route exact path="/inscription" component={SignInForm}/>

@@ -29,12 +29,15 @@ const AdForm: React.FC = () => {
 
     const onSubmit = (data: any) => {
 
-        requestAPI("POST", "AD_ADD", null, data, [], true)
+        requestAPI("POST", "IMAGE", null, data.image, [], true)
+
+        // requestAPI("POST", "AD_ADD", null, data, [], true)
     }
 
 
-    return <IonContent>
+    return (
 
+    <IonContent>
         <IonGrid className="align-center">
             <IonRow className="align-center ion-full-row">
                 <IonCol size="10" size-md="6">
@@ -137,6 +140,7 @@ const AdForm: React.FC = () => {
             </IonRow>
         </IonGrid>
     </IonContent>
+    )
 }
 
 export default AdForm

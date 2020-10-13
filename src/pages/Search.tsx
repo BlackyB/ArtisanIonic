@@ -8,7 +8,7 @@ import {
 } from '@ionic/react';
 import PageTitle from "../components/PageTitle";
 import {requestAPI} from "../API/API";
-import Ad from "./Ad";
+import Ad from "../components/Ad";
 
 const Search = () => {
 

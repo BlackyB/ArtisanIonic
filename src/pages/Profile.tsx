@@ -1,7 +1,7 @@
 import React from 'react';
 import {IonButton, IonCol, IonContent, IonPage, IonRow} from '@ionic/react';
 import PageTitle from "../components/PageTitle";
-import Ad from "./Ad";
+import Ad from "../components/Ad";
 import {AuthConsumer} from "../context/AuthContext";
 import Login from "../components/Login";
 
@@ -16,7 +16,7 @@ const Profile: React.FC = () => {
                         <IonContent fullscreen>
                             <IonRow>
 
-                                <p>{user?.role}</p>
+                                {/*<p>{user?.role}</p>*/}
 
                                 {/*TODO PAGE MON COMPTE*/}
 

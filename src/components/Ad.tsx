@@ -21,8 +21,10 @@ const colAd = (data: any) => {
         let img = ad?.img ? ad.img : "/assets/image/empty.png";
         columns.push(
             <IonCol key={"col-" + i} size="4">
-                <img className={"hover-ad"} src={img} alt=""/>
-                <p className={"ion-text-center "}>{ad.title}</p>
+                <a href={`/recherche/${ad.id}`}>
+                    <img src={img} alt={`${ad.title}`}/>
+                    <p className={"ion-text-center "}>{ad.title}</p>
+                </a>
             </IonCol>
         );
         if ((i + 1) % 3 === 0) {

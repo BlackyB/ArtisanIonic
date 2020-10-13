@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "artisan",
+  "appId": "com.monArtisan.app",
+  "appName": "MonArtisan",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
