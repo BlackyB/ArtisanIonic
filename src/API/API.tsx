@@ -50,13 +50,17 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
 
     let url: string = API_ROOT;
 
-    let config = undefined
-
+    let config;
+    
     if(apiKey)
     {
         let auth: string| null = null
         if(localStorage.getItem('token')) auth = localStorage.getItem('token');
-        config = {headers: {'X-AUTH-TOKEN': auth}}
+        config = {headers: {'Access-Control-Allow-Origin': "*", 'X-AUTH-TOKEN': auth}}
+    }
+    else
+    {
+        config = {headers: {'Access-Control-Allow-Origin': "*"}}
     }
 
 
