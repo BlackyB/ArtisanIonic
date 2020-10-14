@@ -18,7 +18,7 @@ const colAd = (data: any) => {
     let tableRender: any = [];
     let columns: any = [];
     data.forEach((ad: any, i: any) => {
-        let img = ad?.img ? ad.img : "/assets/image/empty.png";
+        let img = ad?.image?.length > 0 ? ad.image[0].path : "/assets/image/empty.png";
         columns.push(
             <IonCol key={"col-" + i} size="4">
                 <a href={`/recherche/${ad.id}`}>

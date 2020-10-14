@@ -20,6 +20,7 @@ const AdForm: React.FC = () => {
 
     const [location, setLocation] = useState("");
     const [searchText, setSearchText] = useState("");
+    const [image, setImage] = useState();
 
     const fileInput = useRef(null);
 
@@ -27,11 +28,35 @@ const AdForm: React.FC = () => {
         setSearchText('')
     }
 
-    const onSubmit = (data: any) => {
+    const onSelectedFile = (e:any) => {
+        setImage(e.target.files[0])
+    }
 
-        requestAPI("POST", "IMAGE", null, data.image, [], true)
+    const onSubmit = async (data: any) => {
 
-        // requestAPI("POST", "AD_ADD", null, data, [], true)
+        if(image)
+        {
+            let uploadImage = new FormData();
+            // @ts-ignore
+            uploadImage.append('image', image);
+
+            let uploadedImage = await requestAPI("POST", "IMAGE", null, uploadImage, [], true)
+
+            if(uploadedImage){
+                data.path = uploadedImage.data.path
+            }
+
+            if(localStorage.getItem('token')){
+                data.token = localStorage.getItem('token');
+            }
+
+            if(data.token)
+            {
+                requestAPI("POST", "AD_ADD", null, data, [], true)
+            }else{
+                throw new Error('No user provided')
+            }
+        }
     }
 
 
@@ -114,6 +139,7 @@ const AdForm: React.FC = () => {
                                             name="image"
                                             type="file"
                                             accept="image/*"
+                                            onChange={onSelectedFile}
                                         />
                                         <IonButton
                                             color="primary"

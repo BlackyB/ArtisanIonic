@@ -46,7 +46,7 @@ const Entity: { key: string, url: string }[] = [
     }
 ]
 
-export const requestAPI = (method: string, entity?: string, id?: number | null, data?: [] | null, options?: { key: string, value: string }[], apiKey: boolean = false): any => {
+export const requestAPI = (method: string, entity?: string, id?: number | null, data?: null | FormData | [], options?: { key: string; value: string }[], apiKey: boolean = false): any => {
 
     let url: string = API_ROOT;
 
