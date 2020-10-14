@@ -44,6 +44,9 @@ class Auth extends Component {
             accessToken: ""
         });
     };
+    login =() =>{
+
+    }
 
     handleAuthentication = () => {
         //TODO
@@ -78,7 +81,8 @@ class Auth extends Component {
             ...this.state,
             initiateLogin: this.initiateLogin,
             handleAuthentication: this.handleAuthentication,
-            logout: this.logout
+            logout: this.logout,
+            login: this.login
         };
         return (
             <AuthProvider value={authProviderValue}>

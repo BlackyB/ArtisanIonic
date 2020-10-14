@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const authContext = createContext({
+export const authContext = createContext({
     authenticated: false, // to check if authenticated or not
     user: {
         role: "",
@@ -11,7 +11,8 @@ const authContext = createContext({
     accessToken: "", // accessToken of user for Auth0
     initiateLogin: (data:any) => {}, // to start the login process
     handleAuthentication: () => {}, // handle Auth0 login process
-    logout: () => {} // logout the user
+    logout: () => {}, // logout the user
+    login:() => {}
 });
 
 export const AuthProvider = authContext.Provider;

@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {AuthConsumer} from "../context/AuthContext";
 import {IonAlert, IonButton, IonCol, IonContent, IonGrid, IonInput, IonRow, IonText} from "@ionic/react";
 import isEmail from "validator/lib/isEmail";
 import {useForm} from "react-hook-form";
+import { UserContext } from "../classes/Context";
+import {requestAPI} from "../API/API";
 
 const Login: React.FC = () => {
-
     const {register, handleSubmit, errors, formState, } = useForm({
         mode: "onBlur"
     });
@@ -31,6 +32,15 @@ const Login: React.FC = () => {
     //
     //     if(!rst) setInvalidLogin(true)
     // }
+    const userContext = useContext(UserContext);
+    const loginHandler = async (data:any) => {
+        let log = await requestAPI("POST", "LOGIN", null, data)
+        // userContext.login(log?.data?.user?.token);
+    };
+    const logoutHandler = () => {
+        userContext.logout();
+    };
+
     const onSubmit = async (data:any, callback: any) => {
         let rst = await callback(data)
         if(!rst) setInvalidLogin(true)

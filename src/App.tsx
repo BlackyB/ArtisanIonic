@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {
     IonApp,
@@ -44,19 +44,26 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import './App.css';
 
+import {UserContext} from './classes/Context'
 
 const App: React.FC = () => {
-
+    const [loggedIn, setLoggedIn] = useState(false);
+    const login = () => {
+        setLoggedIn(true);
+    }
+    const logout = () => {
+        setLoggedIn(false);
+    }
     return (
         <IonApp>
-            <Auth>
+             <UserContext.Provider value={{authenticated: loggedIn  , login: login, logout: logout}}>
                 <IonReactRouter>
                     <IonTabs>
                         <IonRouterOutlet>
                             <Switch>
                                 <Route exact path="/profile" component={Profile}/>
                                 <Route exact path="/accueil" component={Home}/>
-                                <Route exact path="/recherche" component={Search}/>}/>
+                                <Route exact path="/recherche" component={Search}/>
                                 <Route path="/recherche/:id" component={AdDetail}/>
                                 <PrivateRoute exact path="/messagerie/conversation" component={ConversationDetail}/>
                                 <PrivateRoute path="/messagerie" component={Conversation}/>
@@ -85,7 +92,7 @@ const App: React.FC = () => {
                         </IonTabBar>
                     </IonTabs>
                 </IonReactRouter>
-            </Auth>
+            </UserContext.Provider>
         </IonApp>
     );
 }
