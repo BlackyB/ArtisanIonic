@@ -6,8 +6,9 @@ const AdDetail = (props: any) => {
 
     let id = props.match.params.id;
     const [detail, setDetail] = useState({
-        title: null,
+        title: undefined,
         description: null,
+        image: [],
         location: {
             city: {name: null},
             zip: {zip: null},
@@ -30,6 +31,7 @@ const AdDetail = (props: any) => {
     }, [])
 
 
+
     return (
         <IonContent>
             <IonGrid>
@@ -37,16 +39,29 @@ const AdDetail = (props: any) => {
                     ?
                     <IonRow className="ion-justify-content-center">
                         <IonCol size="12" size-md="6">
-                            <h3 className="ion-text-center">{detail.title}</h3>
-                            {detail.location.city ?
-                                <>
-                                <p>{detail.location.city.name} ({detail.location.zip.zip})</p>
-                                    <sub>{detail.location.departement.name} - {detail.location.region.name}</sub>
-                                </>
-                                :
-                                null
-                            }
-                            <p><span className="bold">Description:</span> {detail.description}</p>
+                            <IonRow>
+                                <IonCol size="12" size-md="6" className="ion-padding">
+
+                                    {detail.image.length ?
+                                        <img src={detail?.image[0]} alt={detail.title} />
+                                        :
+                                        <img src="/assets/image/empty.png" alt="No image" />
+                                    }
+
+                                </IonCol>
+                                <IonCol size="12" size-md="6" className="ion-padding">
+                                    <h2 className="ion-text-center ion-no-margin ion-padding-bottom color-primary bold">{detail.title}</h2>
+                                    {detail.location.city ?
+                                        <>
+                                            <p>{detail.location.city.name} ({detail.location.zip.zip})</p>
+                                            <sub>{detail.location.departement.name} - {detail.location.region.name}</sub>
+                                        </>
+                                        :
+                                        null
+                                    }
+                                    <p><span className="bold">Description:</span> {detail.description}</p>
+                                </IonCol>
+                            </IonRow>
                         </IonCol>
                     </IonRow>
                     :

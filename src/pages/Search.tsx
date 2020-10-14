@@ -113,7 +113,7 @@ const Search = () => {
                                         <Ad title="Résultat de la recherche" ad={searchResult}/>
                                     </IonCol>
                                 </IonRow>
-                                <IonInfiniteScroll threshold="20%" onIonInfinite={(e: CustomEvent<void>) => handleScroll(e)}>
+                                <IonInfiniteScroll threshold="100px" onIonInfinite={(e: CustomEvent<void>) => handleScroll(e)}>
                                     <IonInfiniteScrollContent
                                         loadingSpinner="bubbles"
                                         loadingText="Chargement des annonces suivantes...">
