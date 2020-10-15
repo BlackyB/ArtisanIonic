@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {
     IonApp,
@@ -17,7 +17,7 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Conversation from './pages/Conversation';
 import ConversationDetail from './pages/ConversationDetail';
-import Auth from './classes/Auth'
+import Auth from './classes/Auth';
 import SignInForm from "./pages/SignInForm";
 import PrivateRoute from "./components/PrivateRoute";
 import AdForm from "./pages/AdForm";
@@ -44,19 +44,15 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import './App.css';
 
-import {UserContext} from './classes/Context'
 
 const App: React.FC = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const login = () => {
-        setLoggedIn(true);
-    }
-    const logout = () => {
-        setLoggedIn(false);
-    }
+    
+    useEffect(() => {
+        const storedData = localStorage.getItem("user");
+    });
     return (
         <IonApp>
-             <UserContext.Provider value={{authenticated: loggedIn  , login: login, logout: logout}}>
+            <Auth>
                 <IonReactRouter>
                     <IonTabs>
                         <IonRouterOutlet>
@@ -92,7 +88,7 @@ const App: React.FC = () => {
                         </IonTabBar>
                     </IonTabs>
                 </IonReactRouter>
-            </UserContext.Provider>
+            </Auth>
         </IonApp>
     );
 }

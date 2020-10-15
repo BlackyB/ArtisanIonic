@@ -56,11 +56,11 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
     {
         let auth: string| null = null
         if(localStorage.getItem('token')) auth = localStorage.getItem('token');
-        config = {headers: {'Access-Control-Allow-Origin': "*", 'X-AUTH-TOKEN': auth}}
+        config = {headers: {'X-AUTH-TOKEN': auth}}
     }
     else
     {
-        config = {headers: {'Access-Control-Allow-Origin': "*"}}
+        config = undefined
     }
 
 
