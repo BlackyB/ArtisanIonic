@@ -23,7 +23,7 @@ const Profile: React.FC = () => {
         }
     }
 
-    if (!myAdsLoaded) {
+    if (!myAdsLoaded && context.authenticated) {
         loadMyAds()
         setMyAdsLoaded(true)
     }
