@@ -109,7 +109,7 @@ const Search = () => {
                         {searchResult ?
                             <>
                                 <IonRow className="ion-justify-content-center">
-                                    <IonCol size="10" size-md="6">
+                                    <IonCol size="12" size-md="6">
                                         <Ad title="Résultat de la recherche" ad={searchResult}/>
                                     </IonCol>
                                 </IonRow>
@@ -126,7 +126,7 @@ const Search = () => {
 
                         {recentAd ?
                             <IonRow className="ion-justify-content-center">
-                                <IonCol size="10" size-md="6">
+                                <IonCol size="12" size-md="6">
                                     <Ad title="Dernières Annonces" ad={recentAd}/>
                                 </IonCol>
                             </IonRow>

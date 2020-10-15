@@ -47,6 +47,7 @@ import './App.css';
 
 const App: React.FC = () => {
 
+    const IMAGE_PATH = "http://146.59.144.65/images/";
     return (
         <IonApp>
             <Auth>

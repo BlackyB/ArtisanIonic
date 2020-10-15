@@ -130,3 +130,15 @@ ion-grid{
     opacity: 80%;
     cursor: pointer;
 }
+
+.squareImg{
+    width: auto;
+    max-height: 200px;
+    object-fit: fill;
+}
+
+.square{
+    max-height: 300px;
+    width: 100%;
+    overflow: hidden;
+}

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {IonCol, IonContent, IonGrid, IonRow} from "@ionic/react";
+import {IonCol, IonContent, IonGrid, IonImg, IonRow} from "@ionic/react";
 import {requestAPI} from "../API/API";
+import {imagePath} from "../API/ServerUrl";
 
 const AdDetail = (props: any) => {
 
@@ -8,7 +9,7 @@ const AdDetail = (props: any) => {
     const [detail, setDetail] = useState({
         title: undefined,
         description: null,
-        image: [],
+        image: [{path: null}],
         location: {
             city: {name: null},
             zip: {zip: null},
@@ -41,9 +42,8 @@ const AdDetail = (props: any) => {
                         <IonCol size="12" size-md="6">
                             <IonRow>
                                 <IonCol size="12" size-md="6" className="ion-padding">
-
-                                    {detail.image.length ?
-                                        <img src={detail?.image[0]} alt={detail.title} />
+                                    {detail.image.length > 0 ?
+                                        <img src={imagePath + detail?.image[0]?.path} alt={detail.title} />
                                         :
                                         <img src="/assets/image/empty.png" alt="No image" />
                                     }

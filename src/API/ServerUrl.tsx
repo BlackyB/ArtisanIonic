@@ -1,0 +1,1 @@
+export const imagePath = "http://146.59.144.65/images/"
