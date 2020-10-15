@@ -43,6 +43,7 @@ class Auth extends Component {
             },
             accessToken: ""
         });
+        localStorage.removeItem("user")
     };
     login =() =>{
         
@@ -80,7 +81,6 @@ class Auth extends Component {
         try {
             if(localStorage.getItem('user')){
                 let user = JSON.parse(localStorage.getItem('user') || '{}')
-              console.log('ezfeiz',user)
               this.setState({authenticated: true,
                 accessToken: "",
                 user})

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import {AuthConsumer} from "../context/AuthContext";
 import {IonAlert, IonButton, IonCol, IonContent, IonGrid, IonInput, IonRow, IonText} from "@ionic/react";
 import isEmail from "validator/lib/isEmail";

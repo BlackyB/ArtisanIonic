@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {
     IonApp,
@@ -47,9 +47,6 @@ import './App.css';
 
 const App: React.FC = () => {
     
-    useEffect(() => {
-        const storedData = localStorage.getItem("user");
-    });
     return (
         <IonApp>
             <Auth>
