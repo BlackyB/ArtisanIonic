@@ -120,8 +120,8 @@ const Home: React.FC = () => {
                         </IonCol>
                     </IonRow>
 
-                    <IonRow>
-                        <IonSlides pager={true} options={slideOptsOne}>
+                   <IonRow> 
+                        <IonSlides pager={true}  /* options={slideOptsOne}*/>
                             <IonSlide>
                                 <IonRow>
                                     <IonCol className="bg-tertiary ion-padding" size-md="7" size="12">

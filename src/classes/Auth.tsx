@@ -75,8 +75,7 @@ class Auth extends Component {
             user
         });
     }
- 
-    render() {
+    setContext(){
         try {
             if(localStorage.getItem('user')){
                 let user = JSON.parse(localStorage.getItem('user') || '{}')
@@ -85,7 +84,13 @@ class Auth extends Component {
              }
         } catch (error) {
            console.log(error) 
-        }        
+        }   
+    }
+    componentDidMount() {
+        this.setContext();
+      }
+    render() {
+            
         const authProviderValue = {
             ...this.state,
             initiateLogin: this.initiateLogin,
