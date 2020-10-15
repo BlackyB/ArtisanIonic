@@ -5,7 +5,6 @@ import isEmail from "validator/lib/isEmail";
 import {useForm} from "react-hook-form";
 
 const Login: React.FC = () => {
-
     const {register, handleSubmit, errors, formState, } = useForm({
         mode: "onBlur"
     });
@@ -31,6 +30,7 @@ const Login: React.FC = () => {
     //
     //     if(!rst) setInvalidLogin(true)
     // }
+
     const onSubmit = async (data:any, callback: any) => {
         let rst = await callback(data)
         if(!rst) setInvalidLogin(true)

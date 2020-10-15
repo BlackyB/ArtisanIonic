@@ -27,7 +27,7 @@ class Auth extends Component {
         if(log?.data?.result === true)
         {
             this.setSession(log.data.user)
-            localStorage.setItem('token', log.data.user.token)
+            localStorage.setItem('user', JSON.stringify(log.data.user))
         }
 
         return false
@@ -43,7 +43,11 @@ class Auth extends Component {
             },
             accessToken: ""
         });
+        localStorage.removeItem("user")
     };
+    login =() =>{
+        
+    }
 
     handleAuthentication = () => {
         //TODO
@@ -72,13 +76,24 @@ class Auth extends Component {
             user
         });
     }
-
+ 
     render() {
+        try {
+            if(localStorage.getItem('user')){
+                let user = JSON.parse(localStorage.getItem('user') || '{}')
+              this.setState({authenticated: true,
+                accessToken: "",
+                user})
+             }
+        } catch (error) {
+           console.log(error) 
+        }        
         const authProviderValue = {
             ...this.state,
             initiateLogin: this.initiateLogin,
             handleAuthentication: this.handleAuthentication,
-            logout: this.logout
+            logout: this.logout,
+            login: this.login,
         };
         return (
             <AuthProvider value={authProviderValue}>

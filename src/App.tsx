@@ -17,7 +17,7 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Conversation from './pages/Conversation';
 import ConversationDetail from './pages/ConversationDetail';
-import Auth from './classes/Auth'
+import Auth from './classes/Auth';
 import SignInForm from "./pages/SignInForm";
 import PrivateRoute from "./components/PrivateRoute";
 import AdForm from "./pages/AdForm";
@@ -46,8 +46,7 @@ import './App.css';
 
 
 const App: React.FC = () => {
-
-    const IMAGE_PATH = "http://146.59.144.65/images/";
+    
     return (
         <IonApp>
             <Auth>
@@ -57,7 +56,7 @@ const App: React.FC = () => {
                             <Switch>
                                 <Route exact path="/profile" component={Profile}/>
                                 <Route exact path="/accueil" component={Home}/>
-                                <Route exact path="/recherche" component={Search}/>}/>
+                                <Route exact path="/recherche" component={Search}/>
                                 <Route path="/recherche/:id" component={AdDetail}/>
                                 <PrivateRoute exact path="/messagerie/conversation" component={ConversationDetail}/>
                                 <PrivateRoute path="/messagerie" component={Conversation}/>
