@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {IonCol, IonContent, IonGrid, IonRow} from "@ionic/react";
+import {IonButton, IonCol, IonContent, IonGrid, IonItem, IonLabel, IonRow} from "@ionic/react";
 import {requestAPI} from "../API/API";
 import {imagePath} from "../API/ServerUrl";
 
@@ -32,7 +32,6 @@ const AdDetail = (props: any) => {
     }, [])
 
 
-
     return (
         <IonContent>
             <IonGrid>
@@ -43,9 +42,9 @@ const AdDetail = (props: any) => {
                             <IonRow>
                                 <IonCol size="12" size-md="6" className="ion-padding">
                                     {detail.image.length > 0 ?
-                                        <img src={imagePath + detail?.image[0]?.path} alt={detail.title} />
+                                        <img src={imagePath + detail?.image[0]?.path} alt={detail.title}/>
                                         :
-                                        <img src="/assets/image/empty.png" alt="No image" />
+                                        <img src="/assets/image/empty.png" alt="No image"/>
                                     }
 
                                 </IonCol>
@@ -53,13 +52,24 @@ const AdDetail = (props: any) => {
                                     <h2 className="ion-text-center ion-no-margin ion-padding-bottom color-primary bold">{detail.title}</h2>
                                     {detail.location.city ?
                                         <>
-                                            <p>{detail.location.city.name} ({detail.location.zip.zip})</p>
-                                            <sub>{detail.location.departement.name} - {detail.location.region.name}</sub>
+                                            <IonItem>
+                                                <IonLabel>
+                                                    {detail.location.city.name} ({detail.location.zip.zip})
+                                                </IonLabel>
+                                            </IonItem>
+                                            <IonItem>
+                                                <sub>{detail.location.departement.name} - {detail.location.region.name}</sub>
+                                            </IonItem>
                                         </>
                                         :
                                         null
                                     }
-                                    <p><span className="bold">Description:</span> {detail.description}</p>
+                                    <IonRow className="ion-justify-content-center ion-padding">
+                                        <IonButton>Envoyer un message</IonButton>
+                                    </IonRow>
+                                    <IonItem>
+                                        <p><span className="bold">Description:</span><br/><br/> {detail.description}</p>
+                                    </IonItem>
                                 </IonCol>
                             </IonRow>
                         </IonCol>

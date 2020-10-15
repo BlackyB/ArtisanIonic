@@ -7,8 +7,8 @@ class Auth extends Component {
     defaultUser = {
         role: "1",
         email: "",
-        firstname: "",
-        lastname: ""
+        firstName: "",
+        lastName: ""
     }
 
     state = {
@@ -67,8 +67,8 @@ class Auth extends Component {
         const user = {
             role: data.role.id,
             email: data.email,
-            firstname: data.firstName,
-            lastname: data.lastName
+            firstName: data.firstName,
+            lastName: data.lastName
         };
         this.setState({
             authenticated: true,

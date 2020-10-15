@@ -5,8 +5,8 @@ export const authContext = createContext({
     user: {
         role: "",
         email: "",
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
     }, // store all the user details
     accessToken: "", // accessToken of user for Auth0
     initiateLogin: (data:any) => {}, // to start the login process
