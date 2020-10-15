@@ -8,7 +8,8 @@ class Auth extends Component {
         role: "1",
         email: "",
         firstName: "",
-        lastName: ""
+        lastName: "",
+        token: "",
     }
 
     state = {
@@ -16,7 +17,6 @@ class Auth extends Component {
         user: {
             ...this.defaultUser
         },
-        accessToken: ""
     };
 
     data = {};
@@ -41,7 +41,6 @@ class Auth extends Component {
             user: {
                 ...this.defaultUser
             },
-            accessToken: ""
         });
         localStorage.removeItem("user")
     };
@@ -68,11 +67,11 @@ class Auth extends Component {
             role: data.role.id,
             email: data.email,
             firstName: data.firstName,
-            lastName: data.lastName
+            lastName: data.lastName,
+            token: data.token
         };
         this.setState({
             authenticated: true,
-            accessToken: "",
             user
         });
     }
@@ -82,7 +81,6 @@ class Auth extends Component {
             if(localStorage.getItem('user')){
                 let user = JSON.parse(localStorage.getItem('user') || '{}')
               this.setState({authenticated: true,
-                accessToken: "",
                 user})
              }
         } catch (error) {

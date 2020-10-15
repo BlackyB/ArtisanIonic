@@ -29,7 +29,7 @@ const AdDetail = (props: any) => {
 
     useEffect(() => {
         load(id)
-    }, [])
+    }, [id])
 
 
     return (
@@ -44,7 +44,7 @@ const AdDetail = (props: any) => {
                                     {detail.image.length > 0 ?
                                         <img src={imagePath + detail?.image[0]?.path} alt={detail.title}/>
                                         :
-                                        <img src="/assets/image/empty.png" alt="No image"/>
+                                        <img src="/assets/image/empty.png" alt=""/>
                                     }
 
                                 </IonCol>

@@ -30,7 +30,7 @@ let conv = {
 let userId: number = 27;
 // let other_user_id = conv['user_1_id'] === userId ? conv['user_2_id'] : conv['user_1_id'];
 
-let testUserIds = [27, 12]
+// let testUserIds = [27, 12]
 
 
 

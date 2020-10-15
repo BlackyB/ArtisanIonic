@@ -29,6 +29,10 @@ const Entity: { key: string, url: string }[] = [
         url: "/ad",
     },
     {
+        key: "MY_ADS",
+        url: "/ad/myAd",
+    },
+    {
         key: "AD_ADD",
         url: "/ad/add",
     },

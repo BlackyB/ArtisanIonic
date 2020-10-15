@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    IonButton,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -13,7 +12,6 @@ import {
     IonText,
 } from '@ionic/react';
 import PageTitle from "../components/PageTitle";
-import {requestAPI} from "../API/API";
 
 const Home: React.FC = () => {
 

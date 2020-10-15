@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {IonButton, IonCol, IonContent, IonPage, IonRow} from '@ionic/react';
 import PageTitle from "../components/PageTitle";
 import Ad from "../components/Ad";
-import {AuthConsumer} from "../context/AuthContext";
+import {AuthConsumer, authContext} from "../context/AuthContext";
 import Login from "../components/Login";
+import {requestAPI} from "../API/API";
 
 
 const Profile: React.FC = () => {
+
+    const [myAds, setMyAds] = useState()
+    const [myAdsLoaded, setMyAdsLoaded] = useState(false)
+
+    const context = useContext(authContext)
+
+    const loadMyAds = async () => {
+        try {
+            let ads = await requestAPI("GET", "MY_ADS", null, null, [{key: "token", value: context.user.token}])
+            setMyAds(ads.data)
+        } catch {
+            return null
+        }
+    }
+
+    if (!myAdsLoaded) {
+        loadMyAds()
+        setMyAdsLoaded(true)
+    }
 
     let capitalize = function (word: string) {
         return word.charAt(0).toUpperCase() + word.slice(1);
@@ -14,7 +34,7 @@ const Profile: React.FC = () => {
 
     return (
         <AuthConsumer>
-            {({authenticated, accessToken, user, logout}) =>
+            {({authenticated, user, logout}) =>
                 authenticated ? (
                     <IonPage>
                         <PageTitle pageTitle={"Mon compte"}/>
@@ -32,7 +52,11 @@ const Profile: React.FC = () => {
                                         </IonCol>
                                     </IonRow>
                                     <IonRow>
-                                        <Ad title="Mes annonces" ad={['un', 'deux', 'trois', 'quatre']}/>
+                                        {myAdsLoaded && myAds ?
+                                            <Ad title="Mes annonces" ad={myAds}/>
+                                            :
+                                            null
+                                        }
                                     </IonRow>
                                 </IonCol>
                                 <IonCol size-md="3"/>
