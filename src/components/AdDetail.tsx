@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {IonCol, IonContent, IonGrid, IonImg, IonRow} from "@ionic/react";
+import {IonCol, IonContent, IonGrid, IonRow} from "@ionic/react";
 import {requestAPI} from "../API/API";
 import {imagePath} from "../API/ServerUrl";
 

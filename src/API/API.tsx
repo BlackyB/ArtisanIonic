@@ -55,7 +55,11 @@ export const requestAPI = (method: string, entity?: string, id?: number | null, 
     if(apiKey)
     {
         let auth: string| null = null
-        if(localStorage.getItem('token')) auth = localStorage.getItem('token');
+        if(localStorage.getItem('user')){
+            // @ts-ignore
+            let user = JSON.parse(localStorage.getItem('user'));
+            auth = user.token
+        }
         config = {headers: {'X-AUTH-TOKEN': auth}}
     }
     else

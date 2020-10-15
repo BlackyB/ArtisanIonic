@@ -1,5 +1,5 @@
 import React from 'react';
-import {IonCol, IonRow, IonGrid, IonText, IonLabel} from '@ionic/react';
+import {IonCol, IonRow, IonGrid, IonText} from '@ionic/react';
 import '../App.css';
 import {imagePath} from "../API/ServerUrl";
 
