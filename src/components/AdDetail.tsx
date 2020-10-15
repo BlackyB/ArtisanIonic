@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {IonButton, IonCol, IonContent, IonGrid, IonItem, IonLabel, IonRow} from "@ionic/react";
 import {requestAPI} from "../API/API";
 import {imagePath} from "../API/ServerUrl";
@@ -6,6 +6,7 @@ import {imagePath} from "../API/ServerUrl";
 const AdDetail = (props: any) => {
 
     let id = props.match.params.id;
+    const [detailsLoaded, setDetailsLoaded] = useState(false)
     const [detail, setDetail] = useState({
         title: undefined,
         description: null,
@@ -18,31 +19,35 @@ const AdDetail = (props: any) => {
         }
     })
 
-    const load = async (id: number) => {
-        if (id) {
+    const loadDetails = async (id: number) => {
+        try {
             let rst = await requestAPI("GET", "AD", id)
             if (rst) {
                 setDetail(rst.data)
             }
+        } catch {
+            return null
         }
     }
 
-    useEffect(() => {
-        load(id)
-    }, [id])
-
+    if( ! detailsLoaded)
+    {
+        loadDetails(id)
+        setDetailsLoaded(true)
+    }
 
     return (
         <IonContent>
             <IonGrid>
-                {detail
+                {detailsLoaded
                     ?
                     <IonRow className="ion-justify-content-center">
                         <IonCol size="12" size-md="6">
                             <IonRow>
                                 <IonCol size="12" size-md="6" className="ion-padding">
-                                    {detail.image.length > 0 ?
-                                        <img src={imagePath + detail?.image[0]?.path} alt={detail.title}/>
+                                    {detail.image?.[0].path
+                                        ?
+                                        <img src={imagePath + detail.image[0].path} alt={detail.title}/>
                                         :
                                         <img src="/assets/image/empty.png" alt=""/>
                                     }
@@ -75,31 +80,12 @@ const AdDetail = (props: any) => {
                         </IonCol>
                     </IonRow>
                     :
-                    <p>Could not load data</p>
+                    <p>No data loaded</p>
                 }
 
             </IonGrid>
         </IonContent>
     )
-
-
-    // const request = async (id: number) => {
-    //     try {
-    //         ad = await requestAPI("GET", "AD", id)
-    //         // return adRequest;
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     const fetch = async () => {
-    //         let rst = request(id)
-    //     };
-    //     fetch();
-    // }, [id])
-
-
 }
 
 export default AdDetail

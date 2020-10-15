@@ -23,8 +23,11 @@ const Search = () => {
     const loadRecentAds = async () => {
         try {
             let ads = await requestAPI("GET", "RECENT_ADS")
+            if(ads)
+            {
+                setRecentAd(ads.data)
+            }
 
-            setRecentAd(ads.data)
         } catch {
             return null
         }
