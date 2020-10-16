@@ -61,13 +61,18 @@ ion-grid{
     object-fit:cover;
 }
 
+.img-cover{
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
 .custom-input{
     border-bottom: 2px solid lightgrey;
 }
 
 .opacity{
     background-color: rgba(255,255,255,0.5);
-
 }
 
 .icon-medium{
@@ -131,18 +136,21 @@ ion-grid{
     cursor: pointer;
 }
 
-.squareImg{
-    width: auto;
-    max-height: 200px;
-    object-fit: fill;
+.big-icon{
+    font-size: 50px;
+}
+
+.sub{
+    font-size: 0.75rem;
 }
 
 .square{
-    max-height: 300px;
-    width: 100%;
-    overflow: hidden;
+    height: 200px;
+    width: 200px;
 }
 
-.big-icon{
-    font-size: 50px;
+.no-wrap{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: revert;
 }

@@ -8,7 +8,13 @@ const AdDetail = (props: any) => {
     let id = props.match.params.id;
     const [detailsLoaded, setDetailsLoaded] = useState(false)
     const [details, setDetails] = useState({
-        createdAt: null,
+        createdAt: {
+            day: undefined,
+            month: undefined,
+            year: undefined,
+            hours: undefined,
+            minutes: undefined,
+        },
         title: undefined,
         description: null,
         image: [{path: null}],
@@ -44,7 +50,7 @@ const AdDetail = (props: any) => {
     return (
         <IonContent>
             <IonGrid>
-                {     console.log(details)}
+                {console.log(details)}
                 {detailsLoaded
                     ?
 
@@ -54,11 +60,10 @@ const AdDetail = (props: any) => {
                                 <IonCol size="12" size-md="6" className="ion-padding">
                                     {details.image?.[0].path
                                         ?
-                                        <img src={imagePath + details.image[0].path} alt={details.title}/>
+                                        <img className="img-cover" src={imagePath + details.image[0].path} alt={details.title}/>
                                         :
-                                        <img src="/assets/image/empty.png" alt=""/>
+                                        <img className="img-cover" src="/assets/image/empty.png" alt=""/>
                                     }
-
                                 </IonCol>
                                 <IonCol size="12" size-md="6" className="ion-padding">
                                     <h2 className="ion-text-center ion-no-margin ion-padding-bottom color-primary bold">{details.title}</h2>
@@ -67,8 +72,12 @@ const AdDetail = (props: any) => {
                                             {details.location.city.name} ({details.location.zip.zip})
                                         </IonLabel>
                                     </IonItem>
-                                    <IonItem>
-                                        <sub>{details.location.departement.name} - {details.location.region.name}</sub>
+                                    <IonItem text-wrap className="sub">
+                                        {details.location.departement.name} - {details.location.region.name}
+                                    </IonItem>
+                                    <IonItem text-wrap className="sub">
+                                        Annonce publiée
+                                        le {details.createdAt.day}/{details.createdAt.month}/{details.createdAt.year} à {details.createdAt.hours}h{details.createdAt.minutes} par {details.user.firstName} {details.user.lastName}
                                     </IonItem>
                                     <IonRow className="ion-justify-content-center ion-padding">
                                         <a href={`mailto:${details.user.email}?Subject=${details.title}`}>
@@ -76,10 +85,8 @@ const AdDetail = (props: any) => {
                                         </a>
                                     </IonRow>
                                     <IonItem>
-                                        <p>Annonce publiée le {details.createdAt} par {details.user.firstName} {details.user.lastName}</p>
-                                    </IonItem>
-                                    <IonItem>
-                                        <p><span className="bold">Description:</span><br/><br/> {details.description}</p>
+                                        <p><span className="bold">Description:</span><br/><br/> {details.description}
+                                        </p>
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
