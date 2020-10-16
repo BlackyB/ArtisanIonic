@@ -142,3 +142,7 @@ ion-grid{
     width: 100%;
     overflow: hidden;
 }
+
+.big-icon{
+    font-size: 50px;
+}
