@@ -4,7 +4,9 @@ import '../App.css';
 import {imagePath} from "../API/ServerUrl";
 
 const Ad = (props: any) => {
-    let data = colAd(props.ad)
+    let data = <p className="ion-text-center">Aucun résultat correspondants</p>
+    if(props.ad.length > 0) data = colAd(props.ad);
+
     return (
         <IonGrid>
             <IonText className="ion-text-center">
