@@ -7,7 +7,8 @@ const AdDetail = (props: any) => {
 
     let id = props.match.params.id;
     const [detailsLoaded, setDetailsLoaded] = useState(false)
-    const [detail, setDetail] = useState({
+    const [details, setDetails] = useState({
+        createdAt: null,
         title: undefined,
         description: null,
         image: [{path: null}],
@@ -16,6 +17,11 @@ const AdDetail = (props: any) => {
             zip: {zip: null},
             departement: {name: null},
             region: {name: null}
+        },
+        user: {
+            firstName: undefined,
+            lastName: undefined,
+            email: undefined
         }
     })
 
@@ -23,15 +29,14 @@ const AdDetail = (props: any) => {
         try {
             let rst = await requestAPI("GET", "AD", id)
             if (rst) {
-                setDetail(rst.data)
+                setDetails(rst.data)
             }
         } catch {
             return null
         }
     }
 
-    if( ! detailsLoaded)
-    {
+    if (!detailsLoaded) {
         loadDetails(id)
         setDetailsLoaded(true)
     }
@@ -39,41 +44,42 @@ const AdDetail = (props: any) => {
     return (
         <IonContent>
             <IonGrid>
+                {     console.log(details)}
                 {detailsLoaded
                     ?
+
                     <IonRow className="ion-justify-content-center">
                         <IonCol size="12" size-md="6">
                             <IonRow>
                                 <IonCol size="12" size-md="6" className="ion-padding">
-                                    {detail.image?.[0].path
+                                    {details.image?.[0].path
                                         ?
-                                        <img src={imagePath + detail.image[0].path} alt={detail.title}/>
+                                        <img src={imagePath + details.image[0].path} alt={details.title}/>
                                         :
                                         <img src="/assets/image/empty.png" alt=""/>
                                     }
 
                                 </IonCol>
                                 <IonCol size="12" size-md="6" className="ion-padding">
-                                    <h2 className="ion-text-center ion-no-margin ion-padding-bottom color-primary bold">{detail.title}</h2>
-                                    {detail.location.city ?
-                                        <>
-                                            <IonItem>
-                                                <IonLabel>
-                                                    {detail.location.city.name} ({detail.location.zip.zip})
-                                                </IonLabel>
-                                            </IonItem>
-                                            <IonItem>
-                                                <sub>{detail.location.departement.name} - {detail.location.region.name}</sub>
-                                            </IonItem>
-                                        </>
-                                        :
-                                        null
-                                    }
+                                    <h2 className="ion-text-center ion-no-margin ion-padding-bottom color-primary bold">{details.title}</h2>
+                                    <IonItem>
+                                        <IonLabel>
+                                            {details.location.city.name} ({details.location.zip.zip})
+                                        </IonLabel>
+                                    </IonItem>
+                                    <IonItem>
+                                        <sub>{details.location.departement.name} - {details.location.region.name}</sub>
+                                    </IonItem>
                                     <IonRow className="ion-justify-content-center ion-padding">
-                                        <IonButton>Envoyer un message</IonButton>
+                                        <a href={`mailto:${details.user.email}?Subject=${details.title}`}>
+                                            <IonButton>Envoyer un message</IonButton>
+                                        </a>
                                     </IonRow>
                                     <IonItem>
-                                        <p><span className="bold">Description:</span><br/><br/> {detail.description}</p>
+                                        <p>Annonce publiée le {details.createdAt} par {details.user.firstName} {details.user.lastName}</p>
+                                    </IonItem>
+                                    <IonItem>
+                                        <p><span className="bold">Description:</span><br/><br/> {details.description}</p>
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
