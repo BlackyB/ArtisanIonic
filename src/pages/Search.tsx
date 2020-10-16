@@ -23,8 +23,7 @@ const Search = () => {
     const loadRecentAds = async () => {
         try {
             let ads = await requestAPI("GET", "RECENT_ADS")
-            if(ads)
-            {
+            if (ads) {
                 setRecentAd(ads.data)
             }
 
@@ -85,62 +84,61 @@ const Search = () => {
 
 
     return (
-        <IonContent>
-            <IonPage>
-                <PageTitle pageTitle={"Recherche"}/>
-                <IonContent fullscreen>
-                    <IonGrid>
+        <IonPage>
+            <PageTitle pageTitle={"Recherche"}/>
+            <IonContent fullscreen>
+                <IonGrid>
+                    <IonRow className="ion-justify-content-center">
+                        <IonCol size="12" size-md="6">
+                            <IonSearchbar value={searchText} placeholder="Que recherchez-vous ?"
+                                          onIonChange={e => handleSearch(e.detail.value!)}
+                                          animated
+                                          debounce={500}
+                                          showCancelButton="focus"/>
+                        </IonCol>
+                    </IonRow>
+
+                    {loading
+                        ?
                         <IonRow className="ion-justify-content-center">
-                            <IonCol size="12" size-md="6">
-                                <IonSearchbar value={searchText} placeholder="Que recherchez-vous ?"
-                                              onIonChange={e => handleSearch(e.detail.value!)}
-                                              animated
-                                              debounce={500}
-                                              showCancelButton="focus"/>
-                            </IonCol>
+                            <IonSpinner name="crescent"/>
                         </IonRow>
+                        :
+                        null
+                    }
 
-                        {loading
-                            ?
-                                <IonRow className="ion-justify-content-center">
-                                    <IonSpinner name="crescent"/>
-                                </IonRow>
-                            :
-                                null
-                        }
-
-                        {searchResult ?
-                            <>
-                                <IonRow className="ion-justify-content-center">
-                                    <IonCol size="12" size-md="6">
-                                        <Ad title="Résultat de la recherche" ad={searchResult}/>
-                                    </IonCol>
-                                </IonRow>
-                                <IonInfiniteScroll threshold="100px" onIonInfinite={(e: CustomEvent<void>) => handleScroll(e)}>
-                                    <IonInfiniteScrollContent
-                                        loadingSpinner="bubbles"
-                                        loadingText="Chargement des annonces suivantes...">
-                                    </IonInfiniteScrollContent>
-                                </IonInfiniteScroll>
-                            </>
-                            :
-                            null
-                        }
-
-                        {recentAd ?
+                    {searchResult ?
+                        <>
                             <IonRow className="ion-justify-content-center">
                                 <IonCol size="12" size-md="6">
-                                    <Ad title="Dernières Annonces" ad={recentAd}/>
+                                    <Ad title="Résultat de la recherche" ad={searchResult}/>
                                 </IonCol>
                             </IonRow>
-                            :
-                            null
-                        }
+                            <IonInfiniteScroll threshold="100px"
+                                               onIonInfinite={(e: CustomEvent<void>) => handleScroll(e)}>
+                                <IonInfiniteScrollContent
+                                    loadingSpinner="bubbles"
+                                    loadingText="Chargement des annonces suivantes...">
+                                </IonInfiniteScrollContent>
+                            </IonInfiniteScroll>
+                        </>
+                        :
+                        null
+                    }
 
-                    </IonGrid>
-                </IonContent>
-            </IonPage>
-        </IonContent>
+                    {recentAd ?
+                        <IonRow className="ion-justify-content-center">
+                            <IonCol size="12" size-md="6">
+                                <Ad title="Dernières Annonces" ad={recentAd}/>
+                            </IonCol>
+                        </IonRow>
+                        :
+                        null
+                    }
+
+                </IonGrid>
+            </IonContent>
+        </IonPage>
     );
 };
 

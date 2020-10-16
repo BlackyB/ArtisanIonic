@@ -43,7 +43,7 @@ const Profile: React.FC = () => {
                                 <p className="ion-text-center">Bienvenue sur votre espace personnel {capitalize(user.firstName)}</p>
                             </IonRow>
                             {/*TODO PAGE MON COMPTE*/}
-                            <IonRow>
+                            <IonRow className="ion-padding-vertical">
                                 <IonCol size-md="3"/>
                                 <IonCol size="12" size-md="6">
                                     <IonRow>
@@ -61,7 +61,7 @@ const Profile: React.FC = () => {
                                 </IonCol>
                                 <IonCol size-md="3"/>
                             </IonRow>
-                            <IonRow className="ion-justify-content-center">
+                            <IonRow className="ion-justify-content-center ion-padding-vertical">
                                 <IonButton onClick={logout}>
                                     Se déconnecter
                                 </IonButton>
