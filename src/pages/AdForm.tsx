@@ -53,24 +53,25 @@ const AdForm: React.FC = () => {
                 data.path = uploadedImage.data.path
             }
 
-            if (localStorage.getItem('user')) {
-                // @ts-ignore
-                let user = JSON.parse(localStorage.getItem('user'));
-                data.token = user.token
-            }
+        }
 
-            if (data.token) {
-                let ad = await requestAPI("POST", "AD_ADD", null, data, [], true)
+        if (localStorage.getItem('user')) {
+            // @ts-ignore
+            let user = JSON.parse(localStorage.getItem('user'));
+            data.token = user.token
+        }
 
-                if (ad.status === 200) {
-                    setAdSent(true)
-                    setTimeout(function () {
-                        history.push("/profile")
-                    }, 1000);
-                }
-            } else {
-                throw new Error('No user provided')
+        if (data.token) {
+            let ad = await requestAPI("POST", "AD_ADD", null, data, [], true)
+
+            if (ad.status === 200) {
+                setAdSent(true)
+                setTimeout(function () {
+                    history.push("/profile")
+                }, 1000);
             }
+        } else {
+            throw new Error('No user provided')
         }
     }
 

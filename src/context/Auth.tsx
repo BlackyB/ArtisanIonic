@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import {AuthProvider} from "../context/AuthContext";
+
 import {requestAPI} from "../API/API";
+import {AuthProvider} from "./AuthContext";
 
 class Auth extends Component {
 
@@ -31,8 +32,6 @@ class Auth extends Component {
         }
 
         return false
-
-        //TODO
     };
 
     logout = () => {
@@ -44,23 +43,7 @@ class Auth extends Component {
         });
         localStorage.removeItem("user")
     };
-    login =() =>{
-        
-    }
 
-    handleAuthentication = () => {
-        //TODO
-
-        // auth.parseHash((error, authResult) => {
-        //     if (error) {
-        //         console.log(error);
-        //         console.log(`Error ${error.error} Occured`);
-        //         return;
-        //     }
-        //
-        //     this.setSession(authResult.idTokenPayload);
-        // });
-    };
 
     setSession(data: any) {
         const user = {
@@ -94,9 +77,7 @@ class Auth extends Component {
         const authProviderValue = {
             ...this.state,
             initiateLogin: this.initiateLogin,
-            handleAuthentication: this.handleAuthentication,
             logout: this.logout,
-            login: this.login,
         };
         return (
             <AuthProvider value={authProviderValue}>
