@@ -17,9 +17,8 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Conversation from './pages/Conversation';
 import ConversationDetail from './pages/ConversationDetail';
-import Auth from './classes/Auth';
+import Auth from './context/Auth';
 import SignInForm from "./pages/SignInForm";
-import PrivateRoute from "./components/PrivateRoute";
 import AdForm from "./pages/AdForm";
 import AdDetail from "./components/AdDetail";
 
@@ -46,7 +45,6 @@ import './App.css';
 
 
 const App: React.FC = () => {
-    
     return (
         <IonApp>
             <Auth>
@@ -58,8 +56,8 @@ const App: React.FC = () => {
                                 <Route exact path="/accueil" component={Home}/>
                                 <Route exact path="/recherche" component={Search}/>
                                 <Route path="/recherche/:id" component={AdDetail}/>
-                                <PrivateRoute exact path="/messagerie/conversation" component={ConversationDetail}/>
-                                <PrivateRoute path="/messagerie" component={Conversation}/>
+                                <Route exact path="/messagerie/conversation" component={ConversationDetail}/>
+                                <Route path="/messagerie" component={Conversation}/>
                                 <Route exact path="/inscription" component={SignInForm}/>
                                 <Route exact path="/profile/annonce" component={AdForm}/>
                                 <Route exact path="/" render={() => <Redirect to="/accueil"/>}/>

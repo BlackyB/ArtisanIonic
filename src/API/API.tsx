@@ -9,12 +9,28 @@ export const SIREN_HEADERS = {
 
 const Entity: { key: string, url: string }[] = [
     {
+        key: "USER",
+        url: "/user"
+    },
+    {
+        key: "USER_ADD",
+        url: "/user/add"
+    },
+    {
         key: "LOGIN",
         url: "/user/login",
     },
     {
         key: "LOCATION",
         url: "/location",
+    },
+    {
+        key: "AD",
+        url: "/ad",
+    },
+    {
+        key: "AD_ADD",
+        url: "/ad/add",
     },
     {
         key: "ADS",
@@ -25,24 +41,8 @@ const Entity: { key: string, url: string }[] = [
         url: "/ad/recent_ads",
     },
     {
-        key: "AD",
-        url: "/ad",
-    },
-    {
         key: "MY_ADS",
         url: "/ad/myAd",
-    },
-    {
-        key: "AD_ADD",
-        url: "/ad/add",
-    },
-    {
-        key: "USER",
-        url: "/user"
-    },
-    {
-        key: "USER_ADD",
-        url: "/user/add"
     },
     {
         key: "IMAGE",
@@ -50,7 +50,14 @@ const Entity: { key: string, url: string }[] = [
     }
 ]
 
-export const requestAPI = (method: string, entity?: string, id?: number | null, data?: null | FormData | [], options?: { key: string; value: string }[], apiKey: boolean = false): any => {
+export const requestAPI = (
+    method: string,
+    entity?: string,
+    id?: number | null,
+    data?: null | FormData | [],
+    options?: { key: string; value: string }[],
+    apiKey: boolean = false
+): any => {
 
     let url: string = API_ROOT;
 

@@ -59,7 +59,6 @@ const SignInForm: React.FC = () => {
     }
 
     const handleSIRET = async (input: string) => {
-
         try {
             let info = await axios.get("https://api.insee.fr/entreprises/sirene/V3/siret/" + input, SIREN_HEADERS)
 
@@ -70,7 +69,6 @@ const SignInForm: React.FC = () => {
                 let activity = await axios.get("https://api.insee.fr/metadonnees/nomenclatures/v1/codes/nafr2/sousClasse/" + nafCode, SIREN_HEADERS)
                 if (activity) {
                     let intitule = activity.data.intitule
-
                     setNaf(intitule)
                     setCompany(denomination)
                 }
@@ -124,7 +122,6 @@ const SignInForm: React.FC = () => {
             message={'Les mots de passe ne sont pas identiques'}
             buttons={['OK']}
         />
-
         <IonAlert
             isOpen={showAlert2}
             onDidDismiss={() => setShowAlert2(false)}

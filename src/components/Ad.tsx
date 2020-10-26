@@ -26,7 +26,7 @@ const colAd = (data: any) => {
             <IonCol key={"col-" + i} size="4" className="ion-align-items-center">
                 <a href={`/recherche/${ad.id}`}>
                     <img className="img-cover" src={img} alt={`${ad.title}`}/>
-                    <p className="no-wrap sub ion-text-center">{ad.title}</p>
+                    {/*<p className="no-wrap sub ion-text-center">{ad.title}</p>*/}
                 </a>
 
             </IonCol>
